@@ -3,10 +3,11 @@
  */
 
 /**
- * @author Avigail Amar and Yocheved Watenberg
+ * @author Avigail Amar 1660728 and Yocheved Watenberg 1894625
  *
  */
 //import java.util.*;
+
 public abstract class Employee {
 
 	/**

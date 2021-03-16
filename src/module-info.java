@@ -1,0 +1,2 @@
+module targil1 {
+}

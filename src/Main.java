@@ -1,4 +1,4 @@
-// Avigail Esther Amar 
+// Avigail Esther Amar 1660728 amaravigail@gmail.com
 // Yocheved Watenberg 1894625 yocowatt@gmail.com
 
 
@@ -68,7 +68,7 @@
 	        Point3D p1 = new Point3D(1, 2, 3); 
 	        if (!Point3D.ZERO.equals(p1.add(new Vector(-1, -2, -3))))
 	            out.println("ERROR: Point + Vector does not work correctly");
-	        if (!new Vector(1, 1, 1).equals(new Point3D(2, 3, 4).subtract(p1)))
+	        if (!new Vector(1, 1, 1).equals(new Point3D(2, 3, 4).substract(p1)))
 	             out.println("ERROR: Point - Point does not work correctly");
 
 	        out.println("If there were no any other outputs - all tests succeeded!");

@@ -1,7 +1,6 @@
 // Avigail Esther Amar 1660728 amaravigail@gmail.com
 // Yocheved Watenberg 1894625 yocowatt@gmail.com
 
-//   rjee
 	import primitives.*;
 	import static java.lang.System.out;
 	import static primitives.Util.*;

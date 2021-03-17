@@ -1,7 +1,8 @@
 package geometries;
 
+import primitives.Vector;
 import primitives.Point3D;
 
 public interface Geometry {
-	public abstract primitives.Vector getNormal(Point3D pnt);
+	public Vector getNormal(Point3D myPoint3D);
 }

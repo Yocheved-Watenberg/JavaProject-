@@ -2,8 +2,6 @@ package primitives;
 import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 
-import targil1.Coordinate;
-
 /**
  * Class Coordinate is the basic class representing a coordinate for Cartesian
  * coordinate system. The class is based on Util controlling the accuracy.

@@ -1,33 +1,26 @@
 package primitives;
- 
 
 public class Point3D {
-	private Coordinate x;
-	private Coordinate y;
-	private Coordinate z;
+	final Coordinate x;
+	final Coordinate y;
+	final Coordinate z;
+	final static Point3D ZERO = new Point3D(0, 0, 0);
+
 	public Point3D(Coordinate x, Coordinate y, Coordinate z) {
-		super();
 		this.x = x;
 		this.y = y;
 		this.z = z;
 	}
-	public Point3D(double x1,double x2,double x3) {
-		super();
-		Coordinate v=new Coordinate(x1);
-		Coordinate w=new Coordinate(x2);
-		Coordinate u=new Coordinate(x3);
-		x=v;
-		y=w;
-		z=u;
 
+	public Point3D(double x1, double x2, double x3) {
+		Coordinate v = new Coordinate(x1);
+		Coordinate w = new Coordinate(x2);
+		Coordinate u = new Coordinate(x3);
+		x = v;
+		y = w;
+		z = u;
 	}
-	
-	 /**
-     * Equals
-     * 
-     * a changer?
-     */
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -54,46 +47,28 @@ public class Point3D {
 			return false;
 		return true;
 	}
-	public double getX() {
-		return x.coord;
-	}
-	public void setX(Coordinate x) {
-		this.x = x;
-	}
-	public double getY() {
-		return y.coord;
-	}
-	public void setY(Coordinate y) {
-		this.y = y;
-	}
-	public double getZ() {
-		return z.coord;
-	}
-	public void setZ(Coordinate z) {
-		this.z = z;
-	}
+
 	@Override
 	public String toString() {
 		return "Point3D [ Coordinates:x=" + x + ", y=" + y + ", z=" + z + "]";
 	}
-	public Vector substract (Point3D other) 
-	{
-		Point3D myPoint= new Point3D(other.getX()-getX(),other.getY()-getY(),other.getZ()-getZ());
-		return new Vector(myPoint) ;
+
+	public Vector substract(Point3D other) {
+		Point3D myPoint = new Point3D(other.x.coord - x.coord, other.y.coord - y.coord, other.z.coord - z.coord);
+		return new Vector(myPoint);
 	}
-	public Point3D add(Vector other) 
-	{
-		return new Point3D(getX()+other.head.getX(),getY()+other.head.getY(),getZ()+other.head.getZ());
-	 }
-	public double distanceSquared(Point3D other) 
-	{
-		return ((other.getX()-getX())*(other.getX()-getX())+(other.getY()-getY())*(other.getY()-getY())+(other.getZ()-getZ())*(other.getZ()-getZ()));
+
+	public Point3D add(Vector other) {
+		return new Point3D(x.coord + other.head.x.coord, y.coord + other.head.y.coord, z.coord + other.head.z.coord);
 	}
-	public double distance(Point3D other) 
-	{
+
+	public double distanceSquared(Point3D other) {
+		return ((other.x.coord - x.coord) * (other.x.coord - x.coord)
+				+ (other.y.coord - y.coord) * (other.y.coord - y.coord)
+				+ (other.z.coord - z.coord) * (other.z.coord - z.coord));
+	}
+
+	public double distance(Point3D other) {
 		return Math.sqrt(distanceSquared(other));
 	}
-	
-
-
 }

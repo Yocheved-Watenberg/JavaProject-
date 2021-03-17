@@ -85,5 +85,9 @@ public class Polygon implements Geometry {
 	public Vector getNormal(Point3D point) {
 		return plane.getNormal();
 	}
-}
 
+	public Plane getPlane() {
+		return plane;
+	}
+	
+}

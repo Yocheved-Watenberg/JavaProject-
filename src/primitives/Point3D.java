@@ -54,7 +54,7 @@ public class Point3D {
 	}
 
 	public Vector substract(Point3D other) {
-		Point3D myPoint = new Point3D(other.x.coord - x.coord, other.y.coord - y.coord, other.z.coord - z.coord);
+		Point3D myPoint = new Point3D(x.coord - other.x.coord, y.coord - other.y.coord, z.coord - other.z.coord);
 		return new Vector(myPoint);
 	}
 

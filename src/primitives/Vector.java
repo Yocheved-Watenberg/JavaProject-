@@ -90,7 +90,8 @@ public class Vector {
 	}
 
 	public Vector normalized() {
-		Vector norme = normalize();
+		Vector norme = new Vector(this.head);
+		norme.normalize();
 		return norme;
 	}
 }

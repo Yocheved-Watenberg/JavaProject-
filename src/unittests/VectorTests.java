@@ -8,7 +8,8 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
- * @author bwatt
+ * Unit tests for primitives.Vector class
+ * @author Avigail Amar and Yocheved Watenberg 
  *
  */
 public class VectorTests {

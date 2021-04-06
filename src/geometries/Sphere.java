@@ -1,5 +1,6 @@
 package geometries;
 
+import primitives.Coordinate;
 import primitives.Point3D;
 import primitives.Vector;
 
@@ -26,7 +27,7 @@ public class Sphere implements Geometry {
 	}
 
 	public Vector getNormal(Point3D pnt) {
-		return null;
+		return pnt.substract(getCenter());
 	}
 
 }

@@ -1,8 +1,6 @@
 package geometries;
 
-import primitives.Coordinate;
-import primitives.Point3D;
-import primitives.Vector;
+import primitives.*;
 
 public class Triangle extends Polygon {
 

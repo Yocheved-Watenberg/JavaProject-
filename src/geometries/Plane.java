@@ -4,18 +4,27 @@ import primitives.*;
 
 public class Plane implements Geometry {
 	private Point3D point3d;
-	private Vector vector;
+	private Vector normal;
 
-	public Plane(Point3D point3d, Vector vector) 
+	public Plane(Point3D point3d, Vector normal) 
 	{
 		super();
 		this.point3d = point3d;
-		this.vector = vector;
+		this.normal = normal;
 	}
-	public Plane(Point3D myPoint3D1,Point3D myPoint3D2,Point3D myPoint3D3){
+	/**
+	 * 
+	 * @param myPoint3D1
+	 * @param myPoint3D2
+	 * @param myPoint3D3
+	 * ecrire ce que la func fait 
+	 * @return
+	 */
+	public Plane(Point3D myPoint3D1,Point3D myPoint3D2,Point3D myPoint3D3){ 
 		point3d=myPoint3D1;
-		Triangle tr=new Triangle(myPoint3D1,myPoint3D2,myPoint3D3);
-		vector=tr.getNormal(point3d);
+		Vector 	v1 = myPoint3D1.substract(myPoint3D2);
+		Vector 	v2 = myPoint3D1.substract(myPoint3D3);
+		normal= (v1.crossProduct(v2)).normalize();
 	}
 
 	public Point3D getPoint3d() {
@@ -27,16 +36,16 @@ public class Plane implements Geometry {
 	}
 
 	public Vector getVector() {
-		return vector;
+		return normal;
 	}
 
-	public void setVector(Vector vector) {
-		this.vector = vector;
+	public void setVector(Vector normal) {
+		this.normal = normal;
 	}
 
 	@Override
 	public String toString() {
-		return "Plane [point3d=" + point3d + ", vector=" + vector + "]";
+		return "Plane [point3d=" + point3d + ", normal=" + normal + "]";
 	}
 
 	@Override
@@ -44,7 +53,7 @@ public class Plane implements Geometry {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((point3d == null) ? 0 : point3d.hashCode());
-		result = prime * result + ((vector == null) ? 0 : vector.hashCode());
+		result = prime * result + ((normal == null) ? 0 : normal.hashCode());
 		return result;
 	}
 
@@ -62,17 +71,21 @@ public class Plane implements Geometry {
 				return false;
 		} else if (!point3d.equals(other.point3d))
 			return false;
-		if (vector == null) {
-			if (other.vector != null)
+		if (normal == null) {
+			if (other.normal != null)
 				return false;
-		} else if (!vector.equals(other.vector))
+		} else if (!normal.equals(other.normal))
 			return false;
 		return true;
 	}
 
 	public Vector getNormal(Point3D pnt)
 	{
-		Vector v=getPoint3d().substract(pnt);
-		return vector.crossProduct(v);
+		return normal;
+	}
+	
+	public Vector getNormal()
+	{
+		return normal;
 	}
 }

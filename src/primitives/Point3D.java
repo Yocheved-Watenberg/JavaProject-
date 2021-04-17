@@ -92,18 +92,28 @@ public class Point3D {
 
 	/**
 	 * function add to add the @param other to the point3D
-	 * @return ................
+	 * @return a new point after adding the vector to the old point 
 	 */
 	public Point3D add(Vector other) {
 		return new Point3D(x.coord + other.head.x.coord, y.coord + other.head.y.coord, z.coord + other.head.z.coord);
 	}
 
+	/**
+	 * function to calculate the distance squared between two points 
+	 * @param the second point 
+	 * @return the distance squared
+	 */
 	public double distanceSquared(Point3D other) {
 		return ((other.x.coord - x.coord) * (other.x.coord - x.coord)
 				+ (other.y.coord - y.coord) * (other.y.coord - y.coord)
 				+ (other.z.coord - z.coord) * (other.z.coord - z.coord));
 	}
 
+	/**
+	 * function to calculate the distance between two points 
+	 * @param the second point 
+	 * @return the distance 
+	 */
 	public double distance(Point3D other) {
 		return Math.sqrt(distanceSquared(other));
 	}

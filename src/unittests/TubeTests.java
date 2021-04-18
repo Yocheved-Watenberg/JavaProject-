@@ -1,7 +1,6 @@
-//bonsoir 
 /**
- *
- */
+*
+*/
 package unittests;
 
 import static org.junit.Assert.*;
@@ -21,7 +20,8 @@ public class TubeTests {
 	@Test
 	public void testGetNormal()
 
-	{  // =============== Boundary Values Tests ==================
+	{ 
+		// =============== Boundary Values Tests ==================
 		Ray myAxisRay = new Ray(new Point3D(0, 0, 0), new Vector(new Point3D(0, 1, 0)));
 		Tube myTube = new Tube(myAxisRay, 1);
 		Point3D test = new Point3D(1, 0, 0);

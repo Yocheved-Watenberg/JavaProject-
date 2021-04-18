@@ -7,6 +7,10 @@ import primitives.*;
 
 public class TriangleTests {
 
+	/**
+	 * Test method for {@link geometries.Triangle#getNormal(primitives.Point3D)}.
+	 * 
+	 */
 	@Test
 	public void testGetNormal() {
 
@@ -15,7 +19,7 @@ public class TriangleTests {
 		Point3D p3 = new Point3D(3, 0, 1);
 		Triangle triangle = new Triangle(p1, p2, p3);
 		Vector result = triangle.getNormal(p1);
-		Vector expected = new Vector(new Point3D(0,0,-1));
+		Vector expected = new Vector(new Point3D(0, 0, -1));
 		assertEquals("The method GetNormal for a triangle doesn't work", expected, result);
 	}
 

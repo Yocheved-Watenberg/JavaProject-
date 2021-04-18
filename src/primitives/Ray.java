@@ -4,16 +4,32 @@ public class Ray {
 	Point3D p0;
 	Vector dir;
 
+	/**
+	 * Ray constructor receiving the point of beginning and a director vector
+	 * 
+	 * @param p0  the point of the beginning of the ray
+	 * @param dir the director vector
+	 */
 	public Ray(Point3D p0, Vector dir) {
 		dir.normalize();
 		this.p0 = p0;
 		this.dir = dir;
 	}
 
+	/**
+	 * function get
+	 * 
+	 * @return p0 the point of the beginning of the ray
+	 */
 	public Point3D getP0() {
 		return p0;
 	}
 
+	/**
+	 * function get
+	 * 
+	 * @return dir the director vector of the ray
+	 */
 	public Vector getDir() {
 		return dir;
 	}

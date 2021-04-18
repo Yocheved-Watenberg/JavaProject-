@@ -1,8 +1,19 @@
 package geometries;
 
-import primitives.Vector;
-import primitives.Point3D;
+import primitives.*;
+
+/**
+ *Geometry interface for all the geometries that have a normal  
+ * @author Avigail Amar & Yocheved Watenberg 
+ */
 
 public interface Geometry {
+	
+	
+	/**
+	 *function to find the normal in a point 
+	 *@param point 
+	 *@return the normal of the geometry
+	 */
 	public Vector getNormal(Point3D myPoint3D);
 }

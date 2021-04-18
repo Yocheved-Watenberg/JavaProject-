@@ -1,7 +1,3 @@
-/**
- * 
- */
-
 package geometries;
 
 import java.util.List;
@@ -10,7 +6,6 @@ import primitives.*;
 
 /**
  *Intersectable interface for all the geometries that it should be an intersection  
- * 
  * @author Avigail Amar & Yocheved Watenberg 
  */
 

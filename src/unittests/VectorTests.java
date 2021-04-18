@@ -21,8 +21,8 @@ public class VectorTests {
 	 */
 	@Test
 	public void testAdd() {
-//============ Equivalence Partitions Tests ==============
-//TA01: checks if the function add works properly.
+		// ============ Equivalence Partitions Tests ==============
+		// TA01: checks if the function add works properly.
 		Vector v1 = new Vector(1, 2, 3);
 		Vector vecAdd = v1.add(new Vector(1, 2, 3));
 		Vector verify = new Vector(2, 4, 6);
@@ -34,8 +34,8 @@ public class VectorTests {
 	 */
 	@Test
 	public void testSubstract() {
-//============ Equivalence Partitions Tests ==============
-//TA02: checks if the function substract works properly.
+		// ============ Equivalence Partitions Tests ==============
+		// TA02: checks if the function substract works properly.
 		Vector v1 = new Vector(2, 3, 4);
 		Vector vecSub = v1.substract(new Vector(1, 2, 3));
 		Vector verify = new Vector(1, 1, 1);
@@ -47,8 +47,9 @@ public class VectorTests {
 	 */
 	@Test
 	public void testScale() {
-//============ Equivalence Partitions Tests ==============
-//TA03: checks if the function Scale returns a vector with coordinates equal to the scalar*last coordinates .
+		// ============ Equivalence Partitions Tests ==============
+		// TA03: checks if the function Scale returns a vector with coordinates equal to
+		// the scalar*last coordinates .
 		Vector v1 = new Vector(2, 3, 4);
 		Vector vecScale = v1.scale(2);
 		Vector verify = new Vector(4, 6, 8);
@@ -60,8 +61,9 @@ public class VectorTests {
 	 */
 	@Test
 	public void testLengthSquared() {
-//============ Equivalence Partitions Tests ==============
-//TA04: checks if the function lengthSquared returns the length of the vector squared .
+		// ============ Equivalence Partitions Tests ==============
+		// TA04: checks if the function lengthSquared returns the length of the vector
+		// squared .
 		Vector v1 = new Vector(1, 2, 3);
 		assertTrue("lengthSquared() wrong value", Util.isZero(v1.lengthSquared() - 14));
 	}
@@ -71,8 +73,8 @@ public class VectorTests {
 	 */
 	@Test
 	public void testLength() {
-//============ Equivalence Partitions Tests ==============
-//TA05: checks if the function length returns the length of the vector .
+		// ============ Equivalence Partitions Tests ==============
+		// TA05: checks if the function length returns the length of the vector .
 		Vector v1 = new Vector(0, 3, 4);
 		assertTrue("length() wrong value", Util.isZero(v1.length() - 5));
 	}
@@ -113,8 +115,8 @@ public class VectorTests {
 		Vector v2 = new Vector(-2, -4, -6);
 		Vector v3 = new Vector(0, 3, -2);
 
-//============ Equivalence Partitions Tests ==============
-//TA05: checks that the  DotProduct of orthogonal vectors is not zero
+		// ============ Equivalence Partitions Tests ==============
+		// TA05: checks that the DotProduct of orthogonal vectors is not zero
 		assertTrue("dotProduct() for orthogonal vectors is not zero", Util.isZero(v1.dotProduct(v3)));
 		// ============ Equivalence Partitions Tests ==============
 		// TA06: checks that the DotProduct returns the good value
@@ -129,11 +131,11 @@ public class VectorTests {
 		Vector v = new Vector(1, 2, 3);
 		Vector vCopy = new Vector(v.getHead());
 		Vector vCopyNormalize = vCopy.normalize();
-//============ Equivalence Partitions Tests ==============
-//TA07: checks that the  function Normalize doesn't create a new vector
+		// ============ Equivalence Partitions Tests ==============
+		// TA07: checks that the function Normalize doesn't create a new vector
 		assertTrue("  normalize() function creates a new vector", vCopyNormalize == vCopy);
-//============ Equivalence Partitions Tests ==============
-//TA08: checks that the  function Normalize returns an unit vector
+		// ============ Equivalence Partitions Tests ==============
+		// TA08: checks that the function Normalize returns an unit vector
 		assertTrue("normalize() result is not a unit vector", Util.isZero(vCopyNormalize.length() - 1));
 	}
 
@@ -145,10 +147,9 @@ public class VectorTests {
 
 		Vector v = new Vector(1, 2, 3);
 		Vector u = v.normalized();
-//============ Equivalence Partitions Tests ==============
-//TA06: checks that the  function Normalize creates a new vector
+		// ============ Equivalence Partitions Tests ==============
+		// TA06: checks that the function Normalize creates a new vector
 		assertFalse("normalizated() function does not create a new vector", u == v);
 	}
 
 }
-

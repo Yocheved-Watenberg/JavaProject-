@@ -1,5 +1,6 @@
 package geometries;
 
+import java.util.List;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
@@ -59,7 +60,7 @@ public class Tube implements Geometry {
 	@Override
 	public Vector getNormal(Point3D myPoint3D) { 
 		// First we try to find the center of the tube,so:
-		Vector vector1 = axisRay.getP0().substract(myPoint3D);  // we create a vector which is a difference between the
+		Vector vector1 = axisRay.getP0().subtract(myPoint3D);  // we create a vector which is a difference between the
 																// center of the ray and the point sent
 		Vector vector2 = axisRay.getDir().normalized(); 		// we normalize the axis Ray
 		double t = vector1.dotProduct(vector2); 				// t=0 if vector 1 and 2 are orthogonal
@@ -70,6 +71,11 @@ public class Tube implements Geometry {
 		} else {
 			myCenter = axisRay.getP0();							// if 2 vectors are orthogonal, add 0
 		}
-		return (myCenter.substract(myPoint3D).normalize());
+		return (myCenter.subtract(myPoint3D).normalize());
+	}
+	
+	@Override
+	public List<Point3D> findIntersections(Ray ray) {
+		return null;
 	}
 }

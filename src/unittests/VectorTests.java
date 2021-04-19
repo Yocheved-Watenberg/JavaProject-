@@ -30,14 +30,14 @@ public class VectorTests {
 	}
 
 	/**
-	 * Test method for {@link primitives.Vector#substract(primitives.Vector)}.
+	 * Test method for {@link primitives.Vector#subtract(primitives.Vector)}.
 	 */
 	@Test
-	public void testSubstract() {
+	public void testsubtract() {
 		// ============ Equivalence Partitions Tests ==============
-		// TA02: checks if the function substract works properly.
+		// TA02: checks if the function subtract works properly.
 		Vector v1 = new Vector(2, 3, 4);
-		Vector vecSub = v1.substract(new Vector(1, 2, 3));
+		Vector vecSub = v1.subtract(new Vector(1, 2, 3));
 		Vector verify = new Vector(1, 1, 1);
 		assertTrue("The method Add doesn't work properly", verify.equals(vecSub));
 	}

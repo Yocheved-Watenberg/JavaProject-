@@ -7,8 +7,7 @@ import primitives.*;
  * @author Avigail Amar & Yocheved Watenberg 
  */
 
-public interface Geometry {
-	
+public interface Geometry extends Intersectable {
 	
 	/**
 	 *function to find the normal in a point 

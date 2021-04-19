@@ -6,9 +6,9 @@ package primitives;
  */
 
 public class Point3D {
-	final Coordinate x;
-	final Coordinate y;
-	final Coordinate z;
+	private final Coordinate x;
+	private final Coordinate y;
+	private final Coordinate z;
 
 	/**
 	 * Zero is a static const point3D with the values (0,0,0)
@@ -44,6 +44,18 @@ public class Point3D {
 		y = w;
 		z = u;
 	}
+	
+	public double getX() {
+		return x.coord;
+	}
+	
+	public double getY() {
+		return y.coord;
+	}
+	
+	public double getZ() {
+		return z.coord;
+	}
 
 	@Override
 	public boolean equals(Object obj) {
@@ -78,12 +90,12 @@ public class Point3D {
 	}
 
 	/**
-	 * function substract to substract the point from the param do : (other - this)
+	 * function subtract to subtract the point from the param do : (other - this)
 	 * 
 	 * @param other
-	 * @return a new vector after substraction
+	 * @return a new vector after subtraction
 	 */
-	public Vector substract(Point3D other) {
+	public Vector subtract(Point3D other) {
 		Point3D myPoint = new Point3D(other.x.coord - x.coord, other.y.coord - y.coord, other.z.coord - z.coord);
 		return new Vector(myPoint);
 	}
@@ -118,4 +130,5 @@ public class Point3D {
 	public double distance(Point3D other) {
 		return Math.sqrt(distanceSquared(other));
 	}
+
 }

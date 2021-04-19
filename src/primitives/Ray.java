@@ -61,4 +61,8 @@ public class Ray {
 		return "Ray [p0=" + p0 + ", direction=" + dir + "]";
 	}
 
+	public Point3D getPoint(double t) 
+	{
+		return p0.add(dir.scale(t));
+	}
 }

@@ -1,5 +1,7 @@
 package geometries;
 
+import java.util.LinkedList;
+import java.util.List;
 import primitives.*;
 
 /**
@@ -47,7 +49,40 @@ public class Sphere implements Geometry {
 	 * @return the normal vector
 	 */
 	public Vector getNormal(Point3D pnt) {
-		return getCenter().substract(pnt);
+		return getCenter().subtract(pnt);
+	}
+
+	/**
+	 * function findIntersections to find the intersections of a sphere by a ray
+	 * 
+	 * @return list of intersection points
+	 */
+	@Override
+	public List<Point3D> findIntersections(Ray ray) {
+		if (ray.getP0().equals(center)) {
+			return List.of(ray.getPoint(radius));
+		} 
+		else {
+			Vector u = ray.getP0().subtract(center);
+			double tm = u.dotProduct(ray.getDir());
+			double d = Math.sqrt(u.lengthSquared() - (tm * tm));
+			if (d > radius || d == radius)
+				return null;
+			double th = Math.sqrt((radius * radius) - (d * d));
+			double t1 = th + tm;
+			double t2 = tm - th;
+			if (t1 <= 0 && t2 <= 0)
+				return null;
+			else {
+				LinkedList<Point3D> intersections = new LinkedList<Point3D>();
+				if (t1 > 0)
+					intersections.add(ray.getPoint(t1));
+				if (t2 > 0)
+					intersections.add(ray.getPoint(t2));
+				return intersections;
+			}
+
+		}
 	}
 
 }

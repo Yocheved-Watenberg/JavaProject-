@@ -14,11 +14,11 @@ public class Point3DTests {
 	 * Test method for {@link primitives.Point3D#subtract(primitives.Point3D)}.
 	 */
 	@Test
-	public void testSubstract() {// ============ Equivalence Partitions Tests ==============
+	public void testsubtract() {// ============ Equivalence Partitions Tests ==============
 		// TA01: checks if the function subtract works properly.
 		Point3D p1 = new Point3D(1, 2, 3);
 		Vector vecSubResult = new Vector(1, 1, 1);
-		Vector vecSub = p1.substract(new Point3D(2, 3, 4));
+		Vector vecSub = p1.subtract(new Point3D(2, 3, 4));
 		assertTrue(" Point - Point does not work correctly\"", vecSubResult.equals(vecSub));
 	}
 

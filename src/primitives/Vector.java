@@ -66,7 +66,7 @@ public class Vector {
 	 */
 	@Override
 	public String toString() {
-		return "Vector [Coordinates of head: x=" + head.x.coord + ", y=" + head.y.coord + ", z=" + head.z.coord + "]";
+		return "Vector [Coordinates of head: x=" + head.getX() + ", y=" + head.getY() + ", z=" + head.getZ() + "]";
 	}
 
 	/**
@@ -76,8 +76,8 @@ public class Vector {
 	 * @return new Vector of the addition of two vectors
 	 */
 	public Vector add(Vector Other) {
-		return new Vector(new Point3D(head.x.coord + Other.head.x.coord, head.y.coord + Other.head.y.coord,
-				head.z.coord + Other.head.z.coord));
+		return new Vector(new Point3D(head.getX() + Other.head.getX(), head.getY() + Other.head.getY(),
+				head.getZ() + Other.head.getZ()));
 	}
 
 	/**
@@ -86,9 +86,9 @@ public class Vector {
 	 * @param Other : the vector to subtract of a first vector
 	 * @return new Vector of the subtraction of (this - other)
 	 */
-	public Vector substract(Vector Other) {
-		return new Vector(new Point3D(head.x.coord - Other.head.x.coord, head.y.coord - Other.head.y.coord,
-				head.z.coord - Other.head.z.coord));
+	public Vector subtract(Vector Other) {
+		return new Vector(new Point3D(head.getX() - Other.head.getX(), head.getY() - Other.head.getY(),
+				head.getZ() - Other.head.getZ()));
 	}
 
 	/**
@@ -98,7 +98,7 @@ public class Vector {
 	 * @return new Vector after multiplication
 	 */
 	public Vector scale(double number) {
-		return new Vector(new Point3D(head.x.coord * number, head.y.coord * number, head.z.coord * number));
+		return new Vector(new Point3D(head.getX() * number, head.getY() * number, head.getZ() * number));
 	}
 
 	/**
@@ -107,7 +107,7 @@ public class Vector {
 	 * @return length squared of a vector
 	 */
 	public double lengthSquared() {
-		return head.x.coord * head.x.coord + head.y.coord * head.y.coord + head.z.coord * head.z.coord;
+		return head.getX() * head.getX() + head.getY() * head.getY() + head.getZ() * head.getZ();
 	}
 
 	/**
@@ -126,9 +126,9 @@ public class Vector {
 	 * @return cross product of the 2 vectors ( a vector )
 	 */
 	public Vector crossProduct(Vector Other) {
-		return new Vector(new Point3D(head.y.coord * Other.head.z.coord - head.z.coord * Other.head.y.coord,
-				head.z.coord * Other.head.x.coord - head.x.coord * Other.head.z.coord,
-				head.x.coord * Other.head.y.coord - head.y.coord * Other.head.x.coord));
+		return new Vector(new Point3D(head.getY() * Other.head.getZ() - head.getZ() * Other.head.getY(),
+				head.getZ() * Other.head.getX() - head.getX() * Other.head.getZ(),
+				head.getX() * Other.head.getY() - head.getY() * Other.head.getX()));
 	}
 
 	/**
@@ -138,8 +138,8 @@ public class Vector {
 	 * @return dot product of the 2 vectors ( a double )
 	 */
 	public double dotProduct(Vector Other) {
-		return head.x.coord * Other.head.x.coord + head.y.coord * Other.head.y.coord
-				+ head.z.coord * Other.head.z.coord;
+		return head.getX()* Other.head.getX() + head.getY() * Other.head.getY()
+				+ head.getZ() * Other.head.getZ();
 	}
 
 	/**
@@ -148,9 +148,9 @@ public class Vector {
 	 * @return the vector itself after normalization
 	 */
 	public Vector normalize() {
-		Coordinate myx = new Coordinate(this.getHead().x.coord / this.length());
-		Coordinate myy = new Coordinate(this.getHead().y.coord / this.length());
-		Coordinate myz = new Coordinate(this.getHead().z.coord / this.length());
+		Coordinate myx = new Coordinate(this.getHead().getX() / this.length());
+		Coordinate myy = new Coordinate(this.getHead().getY() / this.length());
+		Coordinate myz = new Coordinate(this.getHead().getZ() / this.length());
 		Point3D myp = new Point3D(myx, myy, myz);
 		this.setHead(myp);
 		return this;

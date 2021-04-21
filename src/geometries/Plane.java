@@ -121,7 +121,7 @@ public class Plane implements Geometry {
 
 	/**
 	 * function findIntersections to find the intersections of a plane by a ray 
-	 * 
+	 * @param the ray 
 	 * @return list of intersection points
 	 */
 	@Override

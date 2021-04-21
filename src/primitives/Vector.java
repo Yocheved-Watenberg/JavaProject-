@@ -157,9 +157,9 @@ public class Vector {
 	}
 
 	/**
-	 * function normalized : the vector measures 1 now
+	 * function normalized : return a normalization of the vector, but doesn't modify the inital vector 
 	 * 
-	 * @return the old vector before normalization
+	 * @return a normalization of the vector
 	 */
 	public Vector normalized() {
 		Vector norme = new Vector(this.head);

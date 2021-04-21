@@ -1,10 +1,8 @@
 package unittests;
 
 import static org.junit.Assert.*;
-
 import geometries.*;
 import primitives.*;
-
 import org.junit.Test;
 
 public class GeometriesTests {

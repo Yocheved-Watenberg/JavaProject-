@@ -1,6 +1,5 @@
 package elements;
 
-import geometries.Geometries;
 import primitives.*;
 
 /**
@@ -22,6 +21,14 @@ public class Camera {
 	private double distance;		//distance from the camera to the view plane 
 	
 	
+	
+	@Override
+	public String toString() {
+		return "Camera [p0=" + p0 + ", vTo=" + vTo + ", vUp=" + vUp + ", vRight=" + vRight + ", width=" + width
+				+ ", height=" + height + ", distance=" + distance + "]";
+	}
+
+
 	/**
 	 * @return the p0
 	 */
@@ -106,7 +113,7 @@ public class Camera {
 	 * @param i : row of the pixel
 	 * @return the Ray constructed through the pixel
 	 */
-	public Ray constructRayThroughPixel(int nX, int nY, int j, int i) // i et j sont a inverser? 
+	public Ray constructRayThroughPixel(int nX, int nY, int j, int i) 
 	{
 	Point3D Pc=p0.add(vTo.scale(distance));					//center 
 	double Ry=height/nY;									//pixel height
@@ -120,19 +127,4 @@ public class Camera {
 	return new Ray(p0,Vij); 		//return the ray with p0 and the vector director (normalized by the ctor of ray) 
 	}
 
-	
-	/**
-	 * 
-	 * when the view plane is 3 x 3 
-	 * @param geometrie 
-	 * @return numbers of intersections of the rays of the camera, with the geometries, through the 3x3 view plane.
-	 */
-	public int numbersIntersections(Geometries geometrie) { 
-		int intersections = 0;
-		for (int i = 0; i < 3; i++)
-			for (int j = 0; j < 3; j++)
-				if (geometrie.findIntersections(this.constructRayThroughPixel(3, 3, i, j)) != null) //if there are intersections
-					intersections += geometrie.findIntersections(this.constructRayThroughPixel(3, 3, i, j)).size(); //add to intersections, the num of intersections of the geometries by the ray 
-		return intersections;
-	}
 }

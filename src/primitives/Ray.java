@@ -1,5 +1,7 @@
 package primitives;
 
+import java.util.List;
+
 public class Ray {
 	Point3D p0;
 	Vector dir;
@@ -61,8 +63,30 @@ public class Ray {
 		return "Ray [p0=" + p0 + ", direction=" + dir + "]";
 	}
 
+
 	public Point3D getPoint(double t) 
 	{
 		return p0.add(dir.scale(t));
 	}
+	
+	/**	
+	 * function findClosestPoint
+	 * 
+	 * @param l list of points
+	 * @return closest point of p0
+	 */
+	public Point3D findClosestPoint (List<Point3D> l){
+		if (l.isEmpty()) 
+			return null;	
+		Point3D pointMin = l.get(0);						//we initialize the closest point with the first value of the list
+		double distanceMin = p0.distance(pointMin);			//we calculate its distance to p0
+		for (int i=1; i<l.size(); i++) {					//for all the others points
+			   if(p0.distance(l.get(i)) < distanceMin)		//if they are closest to p0 than the min 
+		           pointMin = l.get(i);						//we change the min
+			   	   distanceMin= p0.distance(pointMin);		//and the distanceMin
+		}
+		return pointMin;									//return the closest point to p0 of the list
+	}
+	
+	
 }

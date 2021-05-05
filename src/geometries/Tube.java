@@ -9,7 +9,7 @@ import primitives.Vector;
  * Tube class implements geometry (have a function getNormal)
  * @author Avigail Amar and Yocheved Wattenberg
  */
-public class Tube implements Geometry {
+public class Tube extends Geometry {
 
 	/**
 	 * axis ray for the center of the tube

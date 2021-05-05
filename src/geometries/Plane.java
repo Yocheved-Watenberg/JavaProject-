@@ -8,7 +8,7 @@ import primitives.*;
  * 
  * @author Avigail Amar and Yocheved Wattenberg
  */
-public class Plane implements Geometry {
+public class Plane extends Geometry {
 	private Point3D point3d;
 	private Vector normal;
 

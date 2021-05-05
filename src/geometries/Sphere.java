@@ -7,7 +7,7 @@ import primitives.*;
  * Sphere class implements geometry (have a function getNormal)
  * @author Avigail Amar and Yocheved Wattenberg
  */
-public class Sphere implements Geometry {
+public class Sphere extends Geometry {
 	private double radius;
 	private Point3D center;
 

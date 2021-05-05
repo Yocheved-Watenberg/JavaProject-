@@ -45,7 +45,7 @@ public interface Intersectable {
 			if (geometry == null) {
 				if (other.geometry != null)
 					return false;
-			} else if (!geometry.equals(other.geometry))
+			} else if (geometry!=other.geometry)
 				return false;
 			if (point == null) {
 				if (other.point != null)

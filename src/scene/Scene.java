@@ -21,7 +21,7 @@ public class Scene {
 	 */
 	public String name; 
 	public Color background = Color.BLACK;
-	public AmbientLight ambientLight = new AmbientLight(Color.BLACK,0);
+	public AmbientLight ambientLight = new AmbientLight();
 	public Geometries geometries = new Geometries();  
 	
 	/**

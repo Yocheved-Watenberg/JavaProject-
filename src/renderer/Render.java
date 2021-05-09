@@ -7,7 +7,6 @@ import java.util.MissingResourceException;
 
 import elements.Camera;
 import primitives.Color;
-import scene.Scene;
 
 
 public class Render {
@@ -17,7 +16,6 @@ public class Render {
 	 *
 	 */
 	ImageWriter imageWriter;
-	Scene scene;
 	Camera camera;
 	RayTracerBase rayTracerBase;
 
@@ -29,14 +27,7 @@ public class Render {
 		this.imageWriter = imageWriter;
 		return this;
 	}
-	/**
-	 * @param scene the scene to set
-	 * @return the object itself for threading
-	 */
-	public Render setScene(Scene scene) {
-		this.scene = scene;
-		return this;
-	}
+
 	/**
 	 * @param camera the camera to set
 	 * @return the object itself for threading
@@ -58,7 +49,7 @@ public class Render {
 	
 	@Override
 	public String toString() {
-		return "Render [imageWriter=" + imageWriter + ", scene=" + scene + ", camera=" + camera + ", rayTracerBase="
+		return "Render [imageWriter=" + imageWriter + ", camera=" + camera + ", rayTracerBase="
 				+ rayTracerBase + "]";
 	}
 	
@@ -71,8 +62,6 @@ public class Render {
 		try {
 		if (imageWriter==null) 
 			throw new MissingResourceException("there is no imageWriter for the render", this.toString(), imageWriter.toString());
-		if (scene==null) 
-			throw new MissingResourceException("there is no scene for the render", this.toString(), scene.toString());
 		if (camera==null) 
 			throw new MissingResourceException("there is no camera for the render", this.toString(), camera.toString());
 		if (rayTracerBase==null) 

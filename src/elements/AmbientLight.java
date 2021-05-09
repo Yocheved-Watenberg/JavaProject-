@@ -27,6 +27,15 @@ public class AmbientLight {
 	public AmbientLight(Color Ia, double kA) {
 		intensity = Ia.scale(kA);
 	}
+	
+	/**
+	 * Default constructor for AmbientLight 
+	 * 
+	 * initializes the above field to Color.BLACK 
+	 */
+	public AmbientLight() {
+		intensity = Color.BLACK;
+	}
 
 
 	/**

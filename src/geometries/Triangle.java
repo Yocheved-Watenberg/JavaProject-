@@ -25,14 +25,14 @@ public class Triangle extends Polygon {
 	public String toString() {
 		return "Triangle [p1=" + vertices.get(0) + ", p2=" + vertices.get(1) + ", p3=" + vertices.get(2) + "]";
 	}
-
+	
+	
 	/**
-	 * function findIntersections to find the intersections of a triangle by a ray 
+	 * function findGeoIntersections to find the intersections of a triangle by a ray 
 	 * 
-	 * @return list of intersection points
+	 * @return list of GeoPoints
 	 */
-	@Override
-	public List<Point3D> findIntersections(Ray ray) {
+	public List<GeoPoint> findGeoIntersections(Ray ray) {
 		// First check the intersections with the plane
 		Point3D point3d = vertices.get(0);
 		Vector v = vertices.get(0).subtract(vertices.get(1));
@@ -56,7 +56,7 @@ public class Triangle extends Polygon {
 		if ((ray.getDir().dotProduct(N1) > 0 && ray.getDir().dotProduct(N2) > 0 && ray.getDir().dotProduct(N3) > 0)
 				|| (ray.getDir().dotProduct(N1) < 0 && ray.getDir().dotProduct(N2) < 0
 						&& ray.getDir().dotProduct(N3) < 0)) {
-			return plane.findIntersections(ray);
+			return List.of(new GeoPoint (this, plane.findIntersections(ray).get(0)));
 		}
 
 		else
@@ -64,4 +64,6 @@ public class Triangle extends Polygon {
 
 	}
 
+	
+	
 }

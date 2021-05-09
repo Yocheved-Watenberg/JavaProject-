@@ -73,9 +73,9 @@ public class Tube extends Geometry {
 		}
 		return (myCenter.subtract(myPoint3D).normalize());
 	}
-	
+
 	@Override
-	public List<Point3D> findIntersections(Ray ray) {
+	public List<GeoPoint> findGeoIntersections(Ray ray) {
 		return null;
 	}
 }

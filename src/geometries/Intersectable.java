@@ -1,6 +1,7 @@
 package geometries;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import primitives.*;
 
@@ -13,6 +14,7 @@ public interface Intersectable {
 
 	/**
 	 * GeoPoint is a Static Internal Auxiliary Department (as a completely passive data structure - PDS) 
+	 * it represents a point on a geometry
 	 */
 	public static class GeoPoint 
 	{
@@ -62,7 +64,13 @@ public interface Intersectable {
 	 *@param ray which intersect 
 	 *@return a list of intersections points 
 	 * 
-	 */
-	List<Point3D> findIntersections(Ray ray);
+	 */	
+	default List<Point3D> findIntersections(Ray ray) {
+	    var geoList = findGeoIntersections(ray);
+	    return geoList == null ? null
+	                           : geoList.stream().map(gp -> gp.point).collect(Collectors.toList());
+	}
+
+	
 	List<GeoPoint> findGeoIntersections(Ray ray);
 }

@@ -52,14 +52,14 @@ public class Sphere extends Geometry {
 	}
 
 	/**
-	 * function findIntersections to find the intersections of a sphere by a ray
+	 * function findGeoIntersections to find the intersections of a sphere by a ray
 	 * 
-	 * @return list of intersection points
+	 * @return list of GeoPoints
 	 */
 	@Override
-	public List<Point3D> findIntersections(Ray ray) {
+	public List<GeoPoint> findGeoIntersections(Ray ray) {
 		if (ray.getP0().equals(center)) {
-			return List.of(ray.getPoint(radius));
+			return List.of(new GeoPoint (this, ray.getPoint(radius)));
 		} 
 		else {
 			Vector u = ray.getP0().subtract(center);
@@ -74,14 +74,15 @@ public class Sphere extends Geometry {
 				return null;
 			else {
 				if (t1 > 0 && t2 > 0)
-				 return List.of(ray.getPoint(t1),ray.getPoint(t2));
+				 return List.of(new GeoPoint (this, ray.getPoint(t1)),(new GeoPoint (this, ray.getPoint(t2))));
 				else if (t1 > 0 )
-					return List.of(ray.getPoint(t1));
+					return List.of(new GeoPoint (this, ray.getPoint(t1)));
 				else if (t2 > 0)
-					return List.of(ray.getPoint(t2));
+					return List.of(new GeoPoint (this, ray.getPoint(t2)));
 			}
 			return null; 
-		}
+		}	
+		
 	}
 
 }

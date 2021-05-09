@@ -2,10 +2,7 @@
  * 
  */
 package unittests;
-
-//import static org.junit.Assert.*;
-
-//import org.junit.Test;
+import org.junit.Test;
 
 /**
  * Unit tests for geometries.Cylinder class
@@ -17,9 +14,8 @@ public class CylinderTests {
 	/**
 	 * Test method for {@link geometries.Cylinder#getNormal(primitives.Point3D)}.
 	 */
-	//@Test
-	//public void testGetNormal() {
-	//	fail("Not yet implemented");
-	//}
+	@Test
+	public void testGetNormal() {
+	}
 
 }

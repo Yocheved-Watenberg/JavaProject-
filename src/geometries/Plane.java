@@ -120,13 +120,12 @@ public class Plane extends Geometry {
 	}
 
 	/**
-	 * function findIntersections to find the intersections of a plane by a ray 
+	 * function findGeoIntersections to find the intersections of a plane by a ray 
 	 * @param the ray 
-	 * @return list of intersection points
+	 * @return list of GeoPoints 
 	 */
 	@Override
-	public List<Point3D> findIntersections(Ray ray) 
-	{
+	public List<GeoPoint> findGeoIntersections(Ray ray) {		
 		if(ray.getP0().equals(point3d))
 			return null; 
 		
@@ -145,8 +144,9 @@ public class Plane extends Geometry {
 				return null;
 			else
 			{
-			return List.of(ray.getPoint(t));
+				return List.of(new GeoPoint(this, ray.getPoint(t)));
 			}
-		}	
+		}
+		
 	}
 }

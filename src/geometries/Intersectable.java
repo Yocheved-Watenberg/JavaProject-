@@ -12,24 +12,24 @@ import primitives.*;
 public interface Intersectable {
 
 	/**
-	 * 
-	 * si tu pe mettre toi stp 
+	 * GeoPoint is a Static Internal Auxiliary Department (as a completely passive data structure - PDS) 
 	 */
 	public static class GeoPoint 
 	{
 	    
 		public Geometry geometry;
 	    public Point3D point;
+	    
 	    /**
-	     * Constructor of Geo points with 2 parameters:
+	     * Constructor of GeoPoint with 2 parameters:
 		 * @param geometry
 		 * @param point
 		 */
 		public GeoPoint(Geometry geometry, Point3D point) {
-			super();
 			this.geometry = geometry;
 			this.point = point;
 		}
+		
 		/**
 		 * Equals to compare the parameters of two objects of type GeoPoints
 		 */

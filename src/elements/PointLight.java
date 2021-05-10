@@ -16,28 +16,21 @@ public class PointLight extends Light implements LightSource {
 	private double kQ = 0;
 	
 	
-	
 	/**
 	 * PointLight ctor 
 	 * 
 	 * @param intensity
 	 * @param position
-	 * @param kC
-	 * @param kL
-	 * @param kQ
 	 */
-	protected PointLight(Color intensity, Point3D position, double kC, double kL, double kQ) {
+	protected PointLight(Color intensity, Point3D position) {
 		super(intensity);
 		this.position = position;
-		this.kC = kC;
-		this.kL = kL;
-		this.kQ = kQ;
 	}
 
 	/**
 	 * @param kC the kC to set
 	 */
-	public PointLight setkC(double kC) {
+	public PointLight setKc(double kC) {
 		this.kC = kC;
 		return this;
 	}
@@ -45,7 +38,7 @@ public class PointLight extends Light implements LightSource {
 	/**
 	 * @param kL the kL to set
 	 */
-	public PointLight setkL(double kL) {
+	public PointLight setKl(double kL) {
 		this.kL = kL;
 		return this;
 	}
@@ -53,7 +46,7 @@ public class PointLight extends Light implements LightSource {
 	/**
 	 * @param kQ the kQ to set
 	 */
-	public PointLight setkQ(double kQ) {
+	public PointLight setKq(double kQ) {
 		this.kQ = kQ;
 		return this;
 	}

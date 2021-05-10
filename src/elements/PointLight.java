@@ -59,15 +59,15 @@ public class PointLight extends Light implements LightSource {
 	}
 
 	@Override
-	public Color getIntensity(Point3D p) {
-		//a remplir par avi 
-		return null;
+	public Color getIntensity(Point3D p) 
+	{
+		double distance=getL(p).length();
+		return intensity.reduce(kC+kL*distance+kQ*distance*distance) ;
 	}
 
 	@Override
 	public Vector getL(Point3D p) {
-		//a remplir par avi 
-		return null;
+		return position.subtract(p);
 	}
 
 }

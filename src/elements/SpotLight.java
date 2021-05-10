@@ -22,5 +22,14 @@ public class SpotLight extends PointLight {
 		super(intensity, position, kC, kL, kQ);
 		this.direction = direction;
 	}
-
+	@Override
+	public Color getIntensity(Point3D p) 
+	{
+		double max=direction.dotProduct(getL(p).normalize());
+		if (max<0)
+			max=0;
+		return super.getIntensity(p).scale(max) ;
+		
+	}
+	
 }

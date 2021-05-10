@@ -27,7 +27,7 @@ public class Scene {
 	public Color background = Color.BLACK;
 	public AmbientLight ambientLight = new AmbientLight();
 	public Geometries geometries = new Geometries();  
-	List<LightSource> lights = new LinkedList<LightSource>(); 
+	public List<LightSource> lights = new LinkedList<LightSource>(); 
 	
 	/**
 	 * Constructor scene 

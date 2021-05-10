@@ -35,7 +35,7 @@ public class RayTracerBasic extends RayTracerBase {
 		 List<GeoPoint> intersections = scene.geometries.findGeoIntersections(ray); //Find the intersection and the scene’s geometries
 		 if (intersections == null) return scene.background;						//If there is no intersection, return the background color
 		 GeoPoint closestPoint = ray.findClosestGeoPoint(intersections);			//Find the closest intersection point
-		 return calcColor(closestPoint,ray);											//Find the color of the intersection point (Ambient light)
+		 return calcColor(closestPoint,ray);										//Find the color of the intersection point (Ambient light)
 	}
 	
 	/***
@@ -52,7 +52,8 @@ public class RayTracerBasic extends RayTracerBase {
 		// add calculated light contribution from all light sources)
 		.add(calcLocalEffects(intersection, ray));
 		}
-	private Color calcLocalEffects(GeoPoint intersection, Ray ray) {
+	private Color calcLocalEffects(GeoPoint intersection, Ray ray) 
+	{
 		Vector v = ray.getDir (); 
 		Vector n = intersection.geometry.getNormal(intersection.point);
 		double nv = Util.alignZero(n.dotProduct(v)); 
@@ -65,28 +66,24 @@ public class RayTracerBasic extends RayTracerBase {
 		double nl = Util.alignZero(n.dotProduct(l));
 		if (nl * nv > 0) { // sign(nl) == sing(nv)
 		Color lightIntensity = lightSource.getIntensity(intersection.point);
-		color = color.add(calcDiffusive(material.kD, l, n, lightIntensity),
-		calcSpecular(material.kS, l, n, v, material.nShininess, lightIntensity));
+		l = l.normalize();
+		n = n.normalize();
+		double dp=l.dotProduct(n);
+		color = color.add(calcDiffusive(material.kD,  lightIntensity,dp),
+		calcSpecular(material.kS, l, n, v, material.nShininess, lightIntensity,dp));
 		}
 		}
 		return color;
-		}
-	Color calcSpecular(double kS,Vector l, Vector n, Vector v,int nShininess, Color lightIntensity)
-	{
-		l = l.normalize();
-		n = n.normalize();
-		v = v.normalize();
-		Vector r= l.subtract(n.scale(2*l.dotProduct(n))) ;
-		double max=(-1)*v.dotProduct(r);
-		if(max<0)
-		 max=0;
-		return lightIntensity.scale(kS*Math.pow(max,nShininess));
 	}
-	Color calcDiffusive(double kD, Vector l, Vector n, Color lightIntensity)
+	Color calcSpecular(double kS,Vector l, Vector n, Vector v,int nShininess, Color lightIntensity,double dp)
+	{   
+		v = v.normalize();
+		Vector r= l.subtract(n.scale(2*dp));
+		return lightIntensity.scale(kS*Math.pow(Math.max(0,(-1)*v.dotProduct(r)),nShininess));
+	}
+	Color calcDiffusive(double kD, Color lightIntensity,double dp)
 	{
-		double ln = (l.normalize()).dotProduct(n.normalize());
-		if (ln<0) ln= -ln;
-		return lightIntensity.scale(kD*ln);
+		return lightIntensity.scale(kD*Math.abs(dp));
 	}
 
 }

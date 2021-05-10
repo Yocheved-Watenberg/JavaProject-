@@ -108,8 +108,8 @@ public class LightsTests {
 	 */
 	@Test
 	public void trianglesPoint() {
-		scene2.geometries.add(triangle1.setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(300)), //
-				triangle2.setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(300)));
+		scene2.geometries.add(triangle1.setMaterial(new Material().setKd(0.5).setKs(0.5).setnShininess(300)), //
+				triangle2.setMaterial(new Material().setKd(0.5).setKs(0.5).setnShininess(300)));
 		scene2.lights.add(new PointLight(new Color(500, 250, 250), new Point3D(10, -10, -130)) //
 				.setKl(0.0005).setKq(0.0005));
 

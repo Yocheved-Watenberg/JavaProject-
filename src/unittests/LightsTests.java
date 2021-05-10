@@ -34,7 +34,7 @@ public class LightsTests {
 
 	/**
 	 * Produce a picture of a sphere lighted by a directional light
-
+	*/
 	@Test
 	public void sphereDirectional() {
 		scene1.geometries.add(sphere);
@@ -51,7 +51,7 @@ public class LightsTests {
 
 	/**
 	 * Produce a picture of a sphere lighted by a point light
-
+	*/
 	@Test
 	public void spherePoint() {
 		scene1.geometries.add(sphere);
@@ -69,7 +69,7 @@ public class LightsTests {
 
 	/**
 	 * Produce a picture of a sphere lighted by a spot light
-
+	*/
 	@Test
 	public void sphereSpot() {
 		scene1.geometries.add(sphere);
@@ -87,7 +87,7 @@ public class LightsTests {
 
 	/**
 	 * Produce a picture of a two triangles lighted by a directional light
-
+	*/
 	@Test
 	public void trianglesDirectional() {
 		scene2.geometries.add(triangle1.setMaterial(new Material().setKd(0.8).setKs(0.2).setnShininess(300)), //
@@ -105,7 +105,7 @@ public class LightsTests {
 
 	/**
 	 * Produce a picture of a two triangles lighted by a point light
-
+	*/
 	@Test
 	public void trianglesPoint() {
 		scene2.geometries.add(triangle1.setMaterial(new Material().setKd(0.5).setKs(0.5).setnShininess(300)), //
@@ -124,7 +124,7 @@ public class LightsTests {
 
 	/**
 	 * Produce a picture of a two triangles lighted by a spot light
-
+	*/
 	@Test
 	public void trianglesSpot() {
 		scene2.geometries.add(triangle1.setMaterial(new Material().setKd(0.5).setKs(0.5).setnShininess(300)),

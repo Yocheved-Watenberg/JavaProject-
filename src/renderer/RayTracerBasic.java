@@ -56,7 +56,8 @@ public class RayTracerBasic extends RayTracerBase {
 		Vector v = ray.getDir (); 
 		Vector n = intersection.geometry.getNormal(intersection.point);
 		double nv = Util.alignZero(n.dotProduct(v)); 
-		if (nv == 0) return Color.BLACK;
+		if (nv == 0) 
+			return Color.BLACK;
 		Material material = intersection.geometry.getMaterial();
 		Color color = Color.BLACK;
 		for (LightSource lightSource : scene.lights) {

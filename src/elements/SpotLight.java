@@ -19,12 +19,15 @@ public class SpotLight extends PointLight {
 		super(intensity, position);
 		this.direction = direction;
 	}
+	/**
+	 * @param Point3D
+	 * @return the intensity of the object on a specific point which is reduced by the distance of the point
+	 * Takes into account the direction also of a spot light
+	 */
 	@Override
 	public Color getIntensity(Point3D p) 
 	{
-		double max=(direction.normalize()).dotProduct(getL(p));
-		if (max<0) max=0;
-		return super.getIntensity(p).scale(max) ;	
+		return super.getIntensity(p).scale(Math.max(direction.normalize().dotProduct(getL(p)),0)) ;	
 	}
 	
 }

@@ -46,19 +46,17 @@ public class RayTracerBasic extends RayTracerBase {
 	 * @param point
 	 * @return the color of a pixel
 	 */
-	// private Color calcColor(GeoPoint gp,Ray ray ) {
-	// return scene.ambientLight.getIntensity().add(gp.geometry.getEmission());
-	// }
 	private Color calcColor(GeoPoint intersection, Ray ray) {
 		return scene.ambientLight.getIntensity().add(intersection.geometry.getEmission())
-				// add calculated light contribution from all light sources)
+				// add calculated light contribution from all light sources
 				.add(calcLocalEffects(intersection, ray));
 	}
-/**
- * @param intersection and a ray
- * @return the color calculated by the diffused and refracted ray
- * 
- */
+
+	/**
+	 * @param intersection and a ray
+	 * @return the color calculated by the diffused and refracted ray
+	 * 
+	 */
 	private Color calcLocalEffects(GeoPoint intersection, Ray ray) {
 		Vector v = ray.getDir();
 		Vector n = intersection.geometry.getNormal(intersection.point);
@@ -70,20 +68,24 @@ public class RayTracerBasic extends RayTracerBase {
 		for (LightSource lightSource : scene.lights) {
 			Vector l = lightSource.getL(intersection.point);
 			double nl = Util.alignZero(n.dotProduct(l));
-			if (nl * nv > 0) { 			// sign(nl) == sing(nv)
+			if (nl * nv > 0) { 												// sign(nl) == sing(nv)
 				Color lightIntensity = lightSource.getIntensity(intersection.point);
-				l = l.normalize();		
+				l = l.normalize();
 				n = n.normalize();
-				double dp = l.dotProduct(n); 		//new parameter because needed in the 2 functions
+				double dp = l.dotProduct(n); 						// help parameter for the next functions 
 				color = color.add(calcDiffusive(material.kD, lightIntensity, dp),
 						calcSpecular(material.kS, l, n, v, material.nShininess, lightIntensity, dp));
 			}
 		}
 		return color;
 	}
+
 	/***
 	 * 
-	 * @params kS(reduction factor),l(ray from the lamp to the object),n(normal),nShininess(shininess),light intensity and dp(dot product between l and v)
+	 * @params kS(reduction factor)
+	 * @param l(ray from the lamp to the object)
+	 * @param n(normal),nShininess(shininess),light intensity 
+	 * @param dp(dot product between l and v)
 	 * @return the color changed by the refraction
 	 */
 
@@ -92,13 +94,14 @@ public class RayTracerBasic extends RayTracerBase {
 		Vector r = l.subtract(n.scale(2 * dp));
 		return lightIntensity.scale(kS * Math.pow(Math.max(0, (-1) * v.dotProduct(r)), nShininess));
 	}
+
 	/**
 	 * 
-	 * @param kD(reduction factor),light intensity and dp(dot product between l and v)
+	 * @param kD(reduction factor)
+	 * @param light intensity
+	 * @param dp(dot product between l and  v)
 	 * @return the color changed by the diffusion
 	 */
-	
-
 	Color calcDiffusive(double kD, Color lightIntensity, double dp) {
 		return lightIntensity.scale(kD * Math.abs(dp));
 	}

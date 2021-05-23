@@ -15,7 +15,34 @@ import scene.Scene;
  *
  */
 public class RayTracerBasic extends RayTracerBase {
-
+	/**
+	 * Constant for the principal moving rays for the shading rays
+	 */
+	private static final double DELTA = 0.1;
+/**
+ * Unshading test operation between a point and the source of the light 
+ * @param l
+ * @param n
+ * @param geopoint
+ * @return
+ */
+	private boolean unshaded(LightSource light, Vector l, Vector n, GeoPoint geopoint) {
+		Vector lightDirection = l.scale(-1); // from point to light source
+		Vector delta = n.scale(n.dotProduct(lightDirection) > 0 ? DELTA : - DELTA);
+		Point3D point = geopoint.point.add(delta);
+		Ray lightRay = new Ray(point, lightDirection);
+		List<GeoPoint> intersections = scene.geometries.findGeoIntersections(lightRay);
+		if (intersections == null) 
+			return true;
+		double lightDistance = light.getDistance(geopoint.point);
+		for (GeoPoint gp : intersections) 
+		{
+			if (Util.alignZero(gp.point.distance(geopoint.point)-lightDistance) <= 0)
+				return false;
+		}
+		return true;
+		
+		}
 	/**
 	 * the constructor inherits from his father
 	 */
@@ -69,12 +96,14 @@ public class RayTracerBasic extends RayTracerBase {
 			Vector l = lightSource.getL(intersection.point);
 			double nl = Util.alignZero(n.dotProduct(l));
 			if (nl * nv > 0) { 												// sign(nl) == sing(nv)
+				if (unshaded(lightSource,l,n, intersection)) {
 				Color lightIntensity = lightSource.getIntensity(intersection.point);
 				l = l.normalize();
 				n = n.normalize();
 				double dp = l.dotProduct(n); 						// help parameter for the next functions 
 				color = color.add(calcDiffusive(material.kD, lightIntensity, dp),
 						calcSpecular(material.kS, l, n, v, material.nShininess, lightIntensity, dp));
+				}
 			}
 		}
 		return color;

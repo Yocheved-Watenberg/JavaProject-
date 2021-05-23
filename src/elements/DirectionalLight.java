@@ -39,5 +39,14 @@ public class DirectionalLight extends Light implements LightSource{
 	public Vector getL(Point3D p) {
 		return direction.normalize();
 	}
+	/**
+	 *@param Point3D 
+	 * @return the distance between the light and the point 
+	 */
+	@Override
+	public double getDistance(Point3D point) {
+		
+		return Double.POSITIVE_INFINITY;
+	}
 
 }

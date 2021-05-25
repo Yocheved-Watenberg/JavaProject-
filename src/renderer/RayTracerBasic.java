@@ -21,10 +21,12 @@ public class RayTracerBasic extends RayTracerBase {
 	private static final double DELTA = 0.1;
 /**
  * Unshading test operation between a point and the source of the light 
+ * @param light 
  * @param l
  * @param n
  * @param geopoint
- * @return
+ * @return true if : unshaded  
+ * @return false if : there is a shade 
  */
 	private boolean unshaded(LightSource light, Vector l, Vector n, GeoPoint geopoint) {
 		Vector lightDirection = l.scale(-1); // from point to light source

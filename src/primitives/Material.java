@@ -7,6 +7,46 @@ public class Material {
 	public int nShininess =0;
 	
 	/**
+	 * Transparency coefficient
+	 */
+	public double kT=0.0;
+	
+	/**
+	 * Reflection coefficient
+	 */
+	public double kR=0.0;	
+	
+	/**
+	 * @param kD the kD to set
+	 */
+	public void setkD(double kD) {
+		this.kD = kD;
+	}
+
+	/**
+	 * @param kS the kS to set
+	 */
+	public void setkS(double kS) {
+		this.kS = kS;
+	}
+
+	/**
+	 * @param kT the kT to set
+	 */
+	public Material setkT(double kT) {
+		this.kT = kT;
+		return this;
+	}
+
+	/**
+	 * @param kR the kR to set
+	 */
+	public Material setkR(double kR) {
+		this.kR = kR;
+		return this;
+	}
+
+	/**
 	 * Material constructor 
 	 * 
 	 * @param kD

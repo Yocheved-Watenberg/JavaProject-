@@ -2,6 +2,8 @@ package geometries;
 
 import java.util.List;
 
+
+
 import java.util.LinkedList;
 import primitives.Ray;
 
@@ -60,5 +62,9 @@ public class Geometries implements Intersectable {
 			return null;
 		return intersections;
 	}
+	
+		
+		
+	
 
 }

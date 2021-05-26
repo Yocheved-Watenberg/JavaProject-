@@ -1,5 +1,5 @@
 package primitives;
-//hi
+
 public class Material {
 	
 	public double kD = 0;

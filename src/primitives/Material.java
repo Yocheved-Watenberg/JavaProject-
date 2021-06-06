@@ -5,15 +5,16 @@ public class Material {
 	public double kD = 0;
 	public double kS = 0;
 	public int nShininess =0;
+	
 	/**
 	 * Transparency coefficient
 	 */
 	public double kT=0.0;
+	
 	/**
 	 * Reflection coefficient
 	 */
-	public double kR=0.0;
-	
+	public double kR=0.0;	
 	
 	/**
 	 * @param kD the kD to set

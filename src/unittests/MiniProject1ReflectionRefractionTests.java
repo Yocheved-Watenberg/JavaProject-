@@ -43,7 +43,7 @@ public class MiniProject1ReflectionRefractionTests{
 						.setKl(0.0004).setKq(0.0000006));
 
 		Render render = new Render() //
-				.setImageWriter(new ImageWriter("refractionTwoSpheres", 500, 500)) //
+				.setImageWriter(new ImageWriter("refractionTwoSpheresminiproject", 500, 500)) //
 				.setCamera(camera) //
 				.setRayTracerBase(new RayTracerBasic(scene));
 		render.renderImageBeamOfRay();
@@ -79,7 +79,7 @@ public class MiniProject1ReflectionRefractionTests{
 		scene.lights.add(new SpotLight(new Color(1020, 400, 400), new Point3D(-750, -750, -150), new Vector(-1, -1, -4)) //
 				.setKl(0.00001).setKq(0.000005));
 
-		ImageWriter imageWriter = new ImageWriter("reflectionTwoSpheresMirrored", 500, 500);
+		ImageWriter imageWriter = new ImageWriter("reflectionTwoSpheresMirroredminiproject", 500, 500);
 		Render render = new Render() //
 				.setImageWriter(imageWriter) //
 				.setCamera(camera) //
@@ -112,7 +112,7 @@ public class MiniProject1ReflectionRefractionTests{
 		scene.lights.add(new SpotLight(new Color(700, 400, 400), new Point3D(60, 50, 0), new Vector(0, 0, -1)) //
 				.setKl(4E-5).setKq(2E-7));
 
-		ImageWriter imageWriter = new ImageWriter("refractionShadow", 600, 600);
+		ImageWriter imageWriter = new ImageWriter("refractionShadowminiproject", 600, 600);
 		Render render = new Render() //
 				.setImageWriter(imageWriter) //
 				.setCamera(camera) //

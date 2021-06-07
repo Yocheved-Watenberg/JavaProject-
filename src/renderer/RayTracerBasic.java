@@ -388,8 +388,8 @@ public class RayTracerBasic extends RayTracerBase {
 		Point3D po1 = rEnd.add(normal.getDir().normalized()); // first point of the square
 		Point3D po2 = rEnd.add(y.getDir().normalized()); // second point of the square
 		for (int i = 0; i < 50; i++) {
-			double randX = rEnd.getX() + random.nextInt((int) (po1.getX() - rEnd.getX()));
-			double randY = rEnd.getY() + random.nextInt((int) (po2.getY() - rEnd.getY()));
+			double randX = rEnd.getX() + ((int) (Math.random() * ((po1.getX() - rEnd.getX())+1)));
+			double randY = rEnd.getY() + ((int) (Math.random() * ((po2.getY() - rEnd.getY())+1)));
 			Vector vec = r.getP0().subtract(new Point3D(randX, randY, rEnd.getZ()));
 			Ray newRay = new Ray(r.getP0(), vec);
 			beamOfRays.add(newRay);
@@ -415,6 +415,7 @@ public class RayTracerBasic extends RayTracerBase {
 	 * @param ray from the light to the object
 	 * @param normal
 	 * @return beam of refracted ray 
+	 *  nombreAleatoire = Min + (int)(Math.random() * ((Max - Min) + 1));
 	 */
 	List<Ray> constructBeamRefractedRay(Point3D p, Vector v, Vector n) {
 		List<Ray> beamOfRays = new LinkedList<Ray>();
@@ -427,8 +428,8 @@ public class RayTracerBasic extends RayTracerBase {
 		Point3D po1 = rEnd.add(normal.getDir()); // first point of the square
 		Point3D po2 = rEnd.add(y.getDir()); // second point of the square
 		for (int i = 0; i < 50; i++) {
-			double randX = rEnd.getX() + random.nextInt((int) (po1.getX() - rEnd.getX()));
-			double randY = rEnd.getY() + random.nextInt((int) (po2.getY() - rEnd.getY()));
+			double randX = rEnd.getX() + ((int) (Math.random() * ((po1.getX() - rEnd.getX())+1)));
+			double randY = rEnd.getY() + ((int) (Math.random() * ((po2.getY() - rEnd.getY())+1)));
 			Vector vec = r.getP0().subtract(new Point3D(randX, randY, rEnd.getZ()));
 			Ray newRay = new Ray(r.getP0(), vec);
 			beamOfRays.add(newRay);
@@ -441,6 +442,7 @@ public class RayTracerBasic extends RayTracerBase {
 	 *
 	 * @param ray calculates all the intersections of a ray on an object and
 	 * @return the closest intersection to the head of the ray
+	 * 
 	 */
 	private GeoPoint findClosestIntersection(Ray ray) {
 		// return ray.findClosestGeoPoint(scene.geometries.findGeoIntersections(ray));

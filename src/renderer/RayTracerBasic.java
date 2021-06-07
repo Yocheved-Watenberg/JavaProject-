@@ -3,9 +3,12 @@
  */
 package renderer;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 import elements.LightSource;
+import geometries.Intersectable;
 import geometries.Intersectable.GeoPoint;
 import primitives.*;
 import scene.Scene;
@@ -277,6 +280,53 @@ public class RayTracerBasic extends RayTracerBase {
 
 		}
 		return null;
+	}
+	
+	
+	/**
+	 * function que g cree
+	 * @param gp
+	 * @param v
+	 * @param level
+	 * @param k
+	 * @return
+	 */
+	private Color calcGlobalEffectsBeamRays(GeoPoint gp, Vector v, int level, double k) {
+		Color color = Color.BLACK;
+		Vector n = gp.geometry.getNormal(gp.point);
+		Material material = gp.geometry.getMaterial();
+		double kkr = k * material.kR;
+		if (kkr > MIN_CALC_COLOR_K)
+//for (Ray r : constructBeamReflectedRay(gp.point, v, n))//cmt fr mimotsa?
+			color = calcGlobalEffect(r, level, material.kR, kkr);
+		double kkt = k * material.kT;
+		if (kkt > MIN_CALC_COLOR_K)
+			color = color.add(calcGlobalEffect(constructRefractedRay(gp.point, v, n), level, material.kT, kkt));
+		return color;
+	}
+	List <Ray> constructBeamReflectedRay(Point3D p, Vector v, Vector n) {
+		List<Ray> beamOfRays= new LinkedList<Ray>();
+		Random random = new Random();
+		v = v.normalize();
+		double vn = v.dotProduct(n);
+		if (Util.isZero(vn))
+			return null;
+		Ray r = new Ray(p, v.subtract(n.scale(2d * vn)).normalized(), n);
+		Point3D rEnd=r.getP0().add(r.getDir());
+		Ray normal= new Ray(rEnd,new Vector((-1)*r.getDir().getHead().getY(),r.getDir().getHead().getX(),0)); 		//first normal(-y,x,0)
+		Ray y=new Ray(rEnd,normal.getDir().crossProduct(r.getDir()));									 			//second normal(mahpela vectorit chel akeren et anormal)
+		Point3D po1=rEnd.add(normal.getDir());																		//point of the rectangle
+		Point3D po2=rEnd.add(y.getDir());																			//point of the rectangle
+         for(int i=0;i<50;i++) {	
+			   double randX = rEnd.getX()+random.nextInt((int) (po1.getX()-rEnd.getX()));							//borne_inférieur + random(borne_superieur-borne_inférieur)
+			   double randY = rEnd.getY()+random.nextInt((int) (po2.getY()-rEnd.getY()));
+			   Vector vec=r.getP0().subtract(new Point3D(randX,randY,rEnd.getZ()));
+			   Ray newRay=new Ray(r.getP0(),vec);
+			   beamOfRays.add(newRay);
+			   
+         }
+
+		return beamOfRays;
 	}
 
 }

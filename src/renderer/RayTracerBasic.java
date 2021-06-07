@@ -376,7 +376,6 @@ public class RayTracerBasic extends RayTracerBase {
 	 */
 	List<Ray> constructBeamReflectedRay(Point3D p, Vector v, Vector n) {
 		List<Ray> beamOfRays = new LinkedList<Ray>();
-		Random random = new Random();
 		v = v.normalize();
 		double vn = v.dotProduct(n);
 		if (Util.isZero(vn))
@@ -419,7 +418,6 @@ public class RayTracerBasic extends RayTracerBase {
 	 */
 	List<Ray> constructBeamRefractedRay(Point3D p, Vector v, Vector n) {
 		List<Ray> beamOfRays = new LinkedList<Ray>();
-		Random random = new Random();
 		v = v.normalize();
 		Ray r = new Ray(p, v, n);		
 		Point3D rEnd = r.getP0().add(r.getDir());

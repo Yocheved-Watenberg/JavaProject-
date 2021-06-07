@@ -5,7 +5,6 @@ package renderer;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 
 import elements.LightSource;
 import geometries.Intersectable.GeoPoint;
@@ -384,11 +383,13 @@ public class RayTracerBasic extends RayTracerBase {
 		Point3D rEnd = r.getP0().add(r.getDir());
 		Ray normal = new Ray(rEnd, new Vector((-1) * r.getDir().getHead().getY(), r.getDir().getHead().getX(), 0)); //first normal (-y,x,0)
 		Ray y = new Ray(rEnd, normal.getDir().crossProduct(r.getDir())); // second normal (cross product) 
-		Point3D po1 = rEnd.add(normal.getDir().normalized()); // first point of the square
-		Point3D po2 = rEnd.add(y.getDir().normalized()); // second point of the square
+		Point3D po1 = rEnd.add(normal.getDir()); // first point of the square
+		Point3D po2 = rEnd.subtract(normal.getDir().getHead()).getHead(); // first point of the square
+		Point3D po3 = rEnd.add(y.getDir()); // third point of the square
+		Point3D po4 = rEnd.subtract(y.getDir().getHead()).getHead(); // fourth point of the square
 		for (int i = 0; i < 50; i++) {
-			double randX = rEnd.getX() + ((int) (Math.random() * ((po1.getX() - rEnd.getX())+1)));
-			double randY = rEnd.getY() + ((int) (Math.random() * ((po2.getY() - rEnd.getY())+1)));
+			double randX = po2.getX() + ((int) (Math.random() * ((po1.getX() - po2.getX())+1)));
+			double randY = po4.getY() + ((int) (Math.random() * ((po3.getY() - po4.getY())+1)));
 			Vector vec = r.getP0().subtract(new Point3D(randX, randY, rEnd.getZ()));
 			Ray newRay = new Ray(r.getP0(), vec);
 			beamOfRays.add(newRay);
@@ -424,10 +425,13 @@ public class RayTracerBasic extends RayTracerBase {
 		Ray normal = new Ray(rEnd, new Vector((-1) * r.getDir().getHead().getY(), r.getDir().getHead().getX(), 0)); //first normal (-y,x,0)
 		Ray y = new Ray(rEnd, normal.getDir().crossProduct(r.getDir())); // second normal (cross product) 
 		Point3D po1 = rEnd.add(normal.getDir()); // first point of the square
-		Point3D po2 = rEnd.add(y.getDir()); // second point of the square
+		Point3D po2 = rEnd.subtract(normal.getDir().getHead()).getHead(); // first point of the square
+		Point3D po3 = rEnd.add(y.getDir()); // third point of the square
+		Point3D po4 = rEnd.subtract(y.getDir().getHead()).getHead(); // fourth point of the square
+
 		for (int i = 0; i < 50; i++) {
-			double randX = rEnd.getX() + ((int) (Math.random() * ((po1.getX() - rEnd.getX())+1)));
-			double randY = rEnd.getY() + ((int) (Math.random() * ((po2.getY() - rEnd.getY())+1)));
+			double randX = po2.getX() + ((int) (Math.random() * ((po1.getX() - po2.getX())+1)));
+			double randY = po4.getY() + ((int) (Math.random() * ((po3.getY() - po4.getY())+1)));
 			Vector vec = r.getP0().subtract(new Point3D(randX, randY, rEnd.getZ()));
 			Ray newRay = new Ray(r.getP0(), vec);
 			beamOfRays.add(newRay);

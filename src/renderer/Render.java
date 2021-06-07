@@ -79,6 +79,37 @@ public class Render {
 		}
 	}
 	
+	
+	
+	
+	/**
+	 * this function check that there are all the fields
+	 * and then fill the matrix of color 
+	 * mini project 1 : the same function than renderImage for beam of rays
+	 * 
+	 */
+	public void renderImageBeamOfRay() {
+		try {
+		if (imageWriter==null) 
+			throw new MissingResourceException("there is no imageWriter for the render", this.toString(), imageWriter.toString());
+		if (camera==null) 
+			throw new MissingResourceException("there is no camera for the render", this.toString(), camera.toString());
+		if (rayTracerBase==null) 
+			throw new MissingResourceException("there is no rayTraceBase for the render", this.toString(), rayTracerBase.toString());
+		}
+		catch (MissingResourceException e){
+			throw new UnsupportedOperationException();
+		}
+		Color pixelColor; 
+		for (int i=0; i<imageWriter.getNx(); i++) {
+			for (int j=0; j<imageWriter.getNy(); j++) {
+				pixelColor = rayTracerBase.traceBeamOfRay(camera.constructRayThroughPixel(imageWriter.getNx(), imageWriter.getNy(),i,j));
+				imageWriter.writePixel(i,j,pixelColor);	 //color the pixel 
+			}		
+		}
+	}
+	 
+	
 	/**
 	 * function to color a grid 
 	 * @param interval

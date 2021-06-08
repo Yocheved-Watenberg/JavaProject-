@@ -6,6 +6,7 @@ package unittests;
 import org.junit.Test;
 
 import elements.*;
+import geometries.Plane;
 import geometries.Sphere;
 import geometries.Triangle;
 import primitives.*;
@@ -21,7 +22,7 @@ import scene.Scene;
  * 
  */
 public class MiniProject1ReflectionRefractionTests{
-	private Scene scene = new Scene("Test scene");
+	private Scene scene = new Scene("Test scene").setAmbientLight(new AmbientLight(new Color(java.awt.Color.WHITE), 0.15));
 
 	/**
 	 */
@@ -32,20 +33,21 @@ public class MiniProject1ReflectionRefractionTests{
 
 		scene.geometries.add( //
 				new Sphere( new Point3D(-30, 0, 0),10) 
-						.setEmission(new Color(java.awt.Color.BLUE)) 
-						.setMaterial(new Material().setKd(0.4).setKs(0.3).setnShininess(100).setkT(0.8)),
+						.setEmission(new Color(java.awt.Color.RED)) 
+						.setMaterial(new Material().setKd(0.5).setKs(0.5).setnShininess(100)),
 				new Sphere( new Point3D(0, 0, 0),10) 
-						.setEmission(new Color(java.awt.Color.BLUE)) 
-						.setMaterial(new Material().setKd(0.4).setKs(0.3).setnShininess(100)),
+						.setEmission(new Color(java.awt.Color.RED)) 
+						.setMaterial(new Material().setKd(0.5).setKs(0.5).setnShininess(100)),
 				new Sphere( new Point3D(30, 0, 0),10) 
-						.setEmission(new Color(java.awt.Color.BLUE)) 
-						.setMaterial(new Material().setKd(0.4).setKs(0.3).setnShininess(100).setkR(0.8)));
+						.setEmission(new Color(java.awt.Color.RED)) 
+						.setMaterial(new Material().setKd(0.5).setKs(0.5).setnShininess(100)),
+				new Plane(new Point3D(0,-20,0), new Vector(0,1,0)).setEmission(new Color(java.awt.Color.BLACK))
+				.setMaterial(new Material().setKd(0.5).setKs(0.5).setnShininess(100).setkR(1)));
 
 		scene.lights.add( //
-				new SpotLight(new Color(1000, 600, 0), new Point3D(-100, -100, 500), new Vector(-1, -1, -2)) //
-					.setKl(0.0004).setKq(0.0000006));
-
-
+				new SpotLight(new Color(1000, 600, 0), new Point3D(0, 0, 500), new Vector(0, 0, -1)) //
+						.setKl(0.0004).setKq(0.0000006));
+	
 
 		Render render = new Render() //
 				.setImageWriter(new ImageWriter("OneRay", 500, 500)) //
@@ -62,17 +64,19 @@ public class MiniProject1ReflectionRefractionTests{
 
 		scene.geometries.add( //
 				new Sphere( new Point3D(-30, 0, 0),10) 
-				.setEmission(new Color(java.awt.Color.BLUE)) 
-				.setMaterial(new Material().setKd(0.4).setKs(0.3).setnShininess(100).setkT(0.8)),
+				.setEmission(new Color(java.awt.Color.RED)) 
+				.setMaterial(new Material().setKd(0.5).setKs(0.5).setnShininess(100)),
 		new Sphere( new Point3D(0, 0, 0),10) 
-				.setEmission(new Color(java.awt.Color.BLUE)) 
-				.setMaterial(new Material().setKd(0.4).setKs(0.3).setnShininess(100)),
+				.setEmission(new Color(java.awt.Color.RED)) 
+				.setMaterial(new Material().setKd(0.5).setKs(0.5).setnShininess(100)),
 		new Sphere( new Point3D(30, 0, 0),10) 
-				.setEmission(new Color(java.awt.Color.BLUE)) 
-				.setMaterial(new Material().setKd(0.4).setKs(0.3).setnShininess(100).setkR(0.8)));
+				.setEmission(new Color(java.awt.Color.RED)) 
+				.setMaterial(new Material().setKd(0.5).setKs(0.5).setnShininess(100)),
+		new Plane(new Point3D(0,-20,0), new Vector(0,1,0)).setEmission(new Color(java.awt.Color.BLACK))
+				.setMaterial(new Material().setKd(0.5).setKs(0.5).setnShininess(100).setkR(1)));
 
 		scene.lights.add( //
-				new SpotLight(new Color(1000, 600, 0), new Point3D(-100, -100, 500), new Vector(-1, -1, -2)) //
+				new SpotLight(new Color(1000, 600, 0), new Point3D(0, 0, 500), new Vector(0, 0, -1)) //
 						.setKl(0.0004).setKq(0.0000006));
 	
 
@@ -85,7 +89,7 @@ public class MiniProject1ReflectionRefractionTests{
 		render.writeToImage();
 	}
 	
-	
+	/*
 	@Test
 	public void Aude() {
 		Camera camera = new Camera(new Point3D(0, 0, 1000), new Vector(0, 0, -1), new Vector(0, 1, 0)) //
@@ -116,5 +120,5 @@ public class MiniProject1ReflectionRefractionTests{
 		render.writeToImage();
 
 	}
-	
+	*/
 }

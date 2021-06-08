@@ -5,7 +5,6 @@ package renderer;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 
 import elements.LightSource;
 import geometries.Intersectable.GeoPoint;
@@ -279,7 +278,7 @@ public class RayTracerBasic extends RayTracerBase {
 		
 		if (kkr > MIN_CALC_COLOR_K)
 		{
-			for (Ray r : constructBeamReflectedRay1(gp.point, v, n))
+			for (Ray r : constructBeamReflectedRay(gp.point, v, n))
 				colors.add(calcGlobalEffect(r, level, material.kR, kkr));   //put all the color for each ray in a list
 			finalColor = Color.average(colors);									//final color is the average of them
 		}
@@ -320,14 +319,13 @@ public class RayTracerBasic extends RayTracerBase {
 		}
 		
 		double kkt = k * material.kT;
+		
 		if (kkt > MIN_CALC_COLOR_K)
-			finalColor = finalColor.add(calcGlobalEffect(constructRefractedRay(gp.point, v, n), level, material.kT, kkt));
-		//if (kkt > MIN_CALC_COLOR_K)
-		//{
-		//	for (Ray r : constructBeamRefractedRay(gp.point, v, n))
-		//		colors.add(calcGlobalEffect(r, level, material.kT, kkt));
-		//	finalColor = finalColor.add(Color.average(colors));			
-		//}
+		{
+			for (Ray r : constructBeamRefractedRay(gp.point, v, n))
+				colors.add(calcGlobalEffect(r, level, material.kT, kkt));
+			finalColor = finalColor.add(Color.average(colors));			
+		}
 		
 		return finalColor;
 	}
@@ -491,38 +489,7 @@ public class RayTracerBasic extends RayTracerBase {
 		}
 		return beamOfRays;
 	}
-	
-	List<Ray> constructBeamReflectedRay1(Point3D p, Vector v, Vector n) {
-		Random rand = new Random();
-		//u = -a/2 + epsilon
-		List<Ray> beamOfRays = new LinkedList<Ray>();
-		v = v.normalize();
-		double vn = v.dotProduct(n);
-		if (Util.isZero(vn))
-			return null;
-		Ray r = new Ray(p, v.subtract(n.scale(2d * vn)).normalized(), n);
-		Point3D rEnd = r.getP0().add(r.getDir());
-		Ray normal = new Ray(rEnd, new Vector((-1) * r.getDir().getHead().getY(), r.getDir().getHead().getX(), 0)); //first normal (-y,x,0)
-		Ray y = new Ray(rEnd, normal.getDir().crossProduct(r.getDir()));											 // second normal (cross product) 
-		Point3D po1 = rEnd.add(normal.getDir()); // first point of the square
-		Point3D po2 = rEnd.subtract(normal.getDir().getHead()).getHead(); // first point of the square
-		//Point3D po3 = rEnd.add(y.getDir()); // third point of the square
-		//Point3D po4 = rEnd.subtract(y.getDir().getHead()).getHead(); // fourth point of the square
-		double distance=po1.distance(po2);
-				for (int i = 0; i < 50; i++) {
-					double epsilon = 1 + (1) * rand.nextDouble();
-					double U=(distance*(-1))/2 + epsilon*distance;
-					double epsilonprime = 1 + (1) * rand.nextDouble();
-					double V=(distance*(-1))/2 + epsilonprime*distance;
-					Vector vecprime =(normal.getDir().scale(U)).add(y.getDir().scale(V));
-					Ray rprime=new Ray(r.getP0(),vecprime);
-					beamOfRays.add(rprime);
-				}
-				return beamOfRays;
-	}
-	
-		
-	
+
 	/**
 	 * @param the point from where to do the refracted ray
 	 * @param ray from the light to the object

@@ -1,6 +1,5 @@
-/**
- * 
- */
+//**
+
 package unittests;
 
 import org.junit.Test;
@@ -8,7 +7,6 @@ import org.junit.Test;
 import elements.*;
 import geometries.Plane;
 import geometries.Sphere;
-import geometries.Triangle;
 import primitives.*;
 import renderer.*;
 import scene.Scene;

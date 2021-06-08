@@ -36,17 +36,26 @@ public class MiniProject1ReflectionRefractionTests{
 						.setEmission(new Color(java.awt.Color.RED)) 
 						.setMaterial(new Material().setKd(0.5).setKs(0.5).setnShininess(100)),
 				new Sphere( new Point3D(0, 0, 0),10) 
-						.setEmission(new Color(java.awt.Color.RED)) 
+						.setEmission(new Color(255,0,255)) 
 						.setMaterial(new Material().setKd(0.5).setKs(0.5).setnShininess(100)),
 				new Sphere( new Point3D(30, 0, 0),10) 
-						.setEmission(new Color(java.awt.Color.RED)) 
+						.setEmission(new Color(java.awt.Color.BLUE)) 
 						.setMaterial(new Material().setKd(0.5).setKs(0.5).setnShininess(100)),
-				new Plane(new Point3D(0,-20,0), new Vector(0,1,0)).setEmission(new Color(java.awt.Color.BLACK))
+				new Plane(new Point3D(0,-10,0), new Vector(0,1,0.1)).setEmission(new Color(0,0,0))
 				.setMaterial(new Material().setKd(0.5).setKs(0.5).setnShininess(100).setkR(1)));
 
+		
 		scene.lights.add( //
-				new SpotLight(new Color(1000, 600, 0), new Point3D(0, 0, 500), new Vector(0, 0, -1)) //
+				new SpotLight(new Color(60, 60, 60), new Point3D(0, 0, 500), new Vector(0, 0, -1)) //
 						.setKl(0.0004).setKq(0.0000006));
+
+		scene.lights.add( //
+				new SpotLight(new Color(60, 60, 60), new Point3D(0, 500, -500), new Vector(0, -0.5, 1)) //
+						.setKl(0.0004).setKq(0.0000006));
+		
+		scene.lights.add(new PointLight(new Color(300, 300, 300), new Point3D(0, 500, 100))//
+
+				.setKl(0.00001).setKq(0.000001));
 	
 
 		Render render = new Render() //
@@ -57,8 +66,10 @@ public class MiniProject1ReflectionRefractionTests{
 		render.writeToImage();
 	}
 	
+	
+	
 	@Test
-	public void BeamOfRay() {
+	public void BeamOfRayRefracted() {
 		Camera camera = new Camera(new Point3D(0, 0, 1000), new Vector(0, 0, -1), new Vector(0, 1, 0)) //
 				.setViewPlaneSize(150, 150).setDistance(1000);
 
@@ -67,25 +78,69 @@ public class MiniProject1ReflectionRefractionTests{
 				.setEmission(new Color(java.awt.Color.RED)) 
 				.setMaterial(new Material().setKd(0.5).setKs(0.5).setnShininess(100)),
 		new Sphere( new Point3D(0, 0, 0),10) 
-				.setEmission(new Color(java.awt.Color.RED)) 
+				.setEmission(new Color(255,0,255)) 
 				.setMaterial(new Material().setKd(0.5).setKs(0.5).setnShininess(100)),
 		new Sphere( new Point3D(30, 0, 0),10) 
-				.setEmission(new Color(java.awt.Color.RED)) 
+				.setEmission(new Color(java.awt.Color.BLUE)) 
 				.setMaterial(new Material().setKd(0.5).setKs(0.5).setnShininess(100)),
-		new Plane(new Point3D(0,-20,0), new Vector(0,1,0)).setEmission(new Color(java.awt.Color.BLACK))
-				.setMaterial(new Material().setKd(0.5).setKs(0.5).setnShininess(100).setkR(1)));
+		new Plane(new Point3D(0,-10,0), new Vector(0,1,0.1)).setEmission(new Color(0,0,0))
+		.setMaterial(new Material().setKd(0.5).setKs(0.5).setnShininess(100).setkR(1)));
+		
+		scene.lights.add( //
+				new SpotLight(new Color(60, 60, 60), new Point3D(0, 0, 500), new Vector(0, 0, -1)) //
+						.setKl(0.0004).setKq(0.0000006));
 
 		scene.lights.add( //
-				new SpotLight(new Color(1000, 600, 0), new Point3D(0, 0, 500), new Vector(0, 0, -1)) //
+				new SpotLight(new Color(60, 60, 60), new Point3D(0, 500, -500), new Vector(0, -0.5, 1)) //
 						.setKl(0.0004).setKq(0.0000006));
+		
+		scene.lights.add(new PointLight(new Color(300, 300, 300), new Point3D(0, 500, 100))//
+				.setKl(0.00001).setKq(0.000001));
 	
 
-
 		Render render = new Render() //
-				.setImageWriter(new ImageWriter("BeamOfRay", 500, 500)) //
+				.setImageWriter(new ImageWriter("BeamOfRayRefracted", 500, 500)) //
 				.setCamera(camera) //
 				.setRayTracerBase(new RayTracerBasic(scene));
-		render.renderImageBeamOfRay();
+		render.renderImageBeamOfRayRefracted();
+		render.writeToImage();
+	}
+	@Test
+	public void BeamOfRayReflected() {
+		Camera camera = new Camera(new Point3D(0, 0, 1000), new Vector(0, 0, -1), new Vector(0, 1, 0)) //
+				.setViewPlaneSize(150, 150).setDistance(1000);
+
+		scene.geometries.add( //
+				new Sphere( new Point3D(-30, 0, 0),10) 
+				.setEmission(new Color(java.awt.Color.RED)) 
+				.setMaterial(new Material().setKd(0.5).setKs(0.5).setnShininess(100)),
+		new Sphere( new Point3D(0, 0, 0),10) 
+				.setEmission(new Color(255,0,255)) 
+				.setMaterial(new Material().setKd(0.5).setKs(0.5).setnShininess(100)),
+		new Sphere( new Point3D(30, 0, 0),10) 
+				.setEmission(new Color(java.awt.Color.BLUE )) 
+				.setMaterial(new Material().setKd(0.5).setKs(0.5).setnShininess(100)),
+		new Plane(new Point3D(0,-10,0), new Vector(0,1,0.1)).setEmission(new Color(0,0,0))
+		.setMaterial(new Material().setKd(0.5).setKs(0.5).setnShininess(100).setkR(1)));
+		
+		scene.lights.add( //
+				new SpotLight(new Color(60, 60, 60), new Point3D(0, 0, 500), new Vector(0, 0, -1)) //
+						.setKl(0.0004).setKq(0.0000006));
+	
+		scene.lights.add( //
+				new SpotLight(new Color(60, 60, 60), new Point3D(0, 500, -500), new Vector(0, -0.5, 1)) //
+						.setKl(0.0004).setKq(0.0000006));
+		
+		
+		scene.lights.add(new PointLight(new Color(60, 60, 60), new Point3D(0, 500, 100))//
+				.setKl(0.00001).setKq(0.000001));
+			
+
+		Render render = new Render() //
+				.setImageWriter(new ImageWriter("BeamOfRayReflected", 500, 500)) //
+				.setCamera(camera) //
+				.setRayTracerBase(new RayTracerBasic(scene));
+		render.renderImageBeamOfRayReflected();
 		render.writeToImage();
 	}
 	

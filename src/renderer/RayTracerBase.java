@@ -41,10 +41,19 @@ abstract public class RayTracerBase {
 	
 	
 	/**
-	 * abstract function 
+	 * abstract function traceBeamOfRayReflected
 	 * @param ray 
 	 * @return the color   
 	 * 
 	 */
-	public abstract Color traceBeamOfRay (Ray ray);
+	public abstract Color traceBeamOfRayReflected (Ray ray);
+	
+	
+	/**
+	 * abstract function traceBeamOfRayRefracted
+	 * @param ray 
+	 * @return the color   
+	 * 
+	 */
+	public abstract Color traceBeamOfRayRefracted (Ray ray);
 }

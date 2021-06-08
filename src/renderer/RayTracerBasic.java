@@ -123,16 +123,30 @@ public class RayTracerBasic extends RayTracerBase {
 
 	/**
 	 * function traceRayBeamOfRay
-	 * mini project 1 : the same function for beam of rays
+	 * mini project 1 : the same function for beam of rays reflected
 
 	 * @param ray
 	 * @return the color of of the intersection point through this ray If there is
 	 *         no intersection with this ray, return the background color
 	 * 
 	 */
-	public Color traceBeamOfRay(Ray ray) {
+	public Color traceBeamOfRayReflected(Ray ray) {
 		GeoPoint closestPoint = findClosestIntersection(ray);
-		return closestPoint == null ? scene.background : calcColorBeamOfRay(closestPoint, ray);
+		return closestPoint == null ? scene.background : calcColorBeamOfRayReflected(closestPoint, ray);
+	}
+	
+	/**
+	 * function traceRayBeamOfRay
+	 * mini project 1 : the same function for beam of rays refracted
+
+	 * @param ray
+	 * @return the color of of the intersection point through this ray If there is
+	 *         no intersection with this ray, return the background color
+	 * 
+	 */
+	public Color traceBeamOfRayRefracted(Ray ray) {
+		GeoPoint closestPoint = findClosestIntersection(ray);
+		return closestPoint == null ? scene.background : calcColorBeamOfRayRefracted(closestPoint, ray);
 	}
 	
 	
@@ -154,16 +168,28 @@ public class RayTracerBasic extends RayTracerBase {
 	
 	
 	/***
-	 * mini project 1 : the same function for beam of rays
+	 * mini project 1 : the same function for beam of rays reflected
 	 * 
 	 * @param point
 	 * @return the color of a pixel
 	 */
-	private Color calcColorBeamOfRay(GeoPoint geopoint, Ray ray) {
-		return calcColorBeamOfRay(findClosestIntersection(ray), ray, MAX_CALC_COLOR_LEVEL, INITIAL_K)
+	private Color calcColorBeamOfRayReflected(GeoPoint geopoint, Ray ray) {
+		return calcColorBeamOfRayReflected(findClosestIntersection(ray), ray, MAX_CALC_COLOR_LEVEL, INITIAL_K)
 				.add(scene.ambientLight.getIntensity());
 	}
 
+	/***
+	 * mini project 1 : the same function for beam of rays refracted
+	 * 
+	 * @param point
+	 * @return the color of a pixel
+	 */
+	private Color calcColorBeamOfRayRefracted(GeoPoint geopoint, Ray ray) {
+		return calcColorBeamOfRayRefracted(findClosestIntersection(ray), ray, MAX_CALC_COLOR_LEVEL, INITIAL_K)
+				.add(scene.ambientLight.getIntensity());
+	}
+
+	
 	/**
 	 * function calcColor non recursive 
 	 * @param geoPoint
@@ -181,17 +207,32 @@ public class RayTracerBasic extends RayTracerBase {
 	
 	/**
 	 * function calcColor non recursive 
-	 * mini project 1 : the same function for beam of rays
+	 * mini project 1 : the same function for beam of rays, refraction
 	 * @param geoPoint
 	 * @param ray
 	 * @param level : where to stop the recursia
 	 * @param k : double 
 	 * @return the color obtained by the reflection,refraction,diffusive and  specular rays
 	 */
-	private Color calcColorBeamOfRay(GeoPoint intersection, Ray ray, int level, double k) {
+	private Color calcColorBeamOfRayRefracted(GeoPoint intersection, Ray ray, int level, double k) {
 		Color color = intersection.geometry.getEmission();
 		color = color.add(calcLocalEffects(intersection, ray, k));
-		return level == 1 ? color : color.add(calcGlobalEffectsBeamOfRay(intersection, ray.getDir(), level, k));
+		return level == 1 ? color : color.add(calcGlobalEffectsBeamOfRayRefracted(intersection, ray.getDir(), level, k));
+	}
+	
+	/**
+	 * function calcColor non recursive 
+	 * mini project 1 : the same function for beam of rays, reflected
+	 * @param geoPoint
+	 * @param ray
+	 * @param level : where to stop the recursia
+	 * @param k : double 
+	 * @return the color obtained by the reflection,refraction,diffusive and  specular rays
+	 */
+	private Color calcColorBeamOfRayReflected(GeoPoint intersection, Ray ray, int level, double k) {
+		Color color = intersection.geometry.getEmission();
+		color = color.add(calcLocalEffects(intersection, ray, k));
+		return level == 1 ? color : color.add(calcGlobalEffectsBeamOfRayReflected(intersection, ray.getDir(), level, k));
 	}
 
 	/**
@@ -220,7 +261,7 @@ public class RayTracerBasic extends RayTracerBase {
 	
 	/**
 	 * mini project 1 : the same function for beam of rays
-	 * @return the color obtained by the reflection and refraction rays
+	 * @return the color obtained by the reflection rays
 	 * Recursive function which calls the function calcGlobalEffect
 	 * 
 	 * @param gp
@@ -228,7 +269,7 @@ public class RayTracerBasic extends RayTracerBase {
 	 * @param level
 	 * @param k
 =	 */
-	private Color calcGlobalEffectsBeamOfRay(GeoPoint gp, Vector v, int level, double k) {
+	private Color calcGlobalEffectsBeamOfRayReflected(GeoPoint gp, Vector v, int level, double k) {
 		Color finalColor = Color.BLACK;
 		Vector n = gp.geometry.getNormal(gp.point);
 		Material material = gp.geometry.getMaterial();
@@ -243,7 +284,41 @@ public class RayTracerBasic extends RayTracerBase {
 			finalColor = Color.average(colors);									//final color is the average of them
 		}
 		
-		colors.clear();
+		double kkt = k * material.kT;
+		
+		if (kkt > MIN_CALC_COLOR_K)
+		{
+			finalColor = finalColor.add(calcGlobalEffect(constructRefractedRay(gp.point, v, n), level, material.kT, kkt));	
+		}
+		
+		return finalColor;
+	}
+	
+	
+	
+	/**
+	 * mini project 1 : the same function for beam of rays
+	 * @return the color obtained by the refraction rays
+	 * Recursive function which calls the function calcGlobalEffect
+	 * 
+	 * @param gp
+	 * @param v
+	 * @param level
+	 * @param k
+=	 */
+	private Color calcGlobalEffectsBeamOfRayRefracted(GeoPoint gp, Vector v, int level, double k) {
+		Color finalColor = Color.BLACK;
+		Vector n = gp.geometry.getNormal(gp.point);
+		Material material = gp.geometry.getMaterial();
+		
+		List<Color> colors = new LinkedList<Color>();   //list to do the average
+		double kkr = k * material.kR;
+		
+		if (kkr > MIN_CALC_COLOR_K)
+		{
+			finalColor = calcGlobalEffect(constructReflectedRay(gp.point, v, n), level, material.kR, kkr);
+		}
+		
 		double kkt = k * material.kT;
 		if (kkt > MIN_CALC_COLOR_K)
 			finalColor = finalColor.add(calcGlobalEffect(constructRefractedRay(gp.point, v, n), level, material.kT, kkt));
@@ -259,6 +334,8 @@ public class RayTracerBasic extends RayTracerBase {
 	
 	
 
+	
+	
 	/**
 	 *
 	 * @param ray
@@ -280,13 +357,27 @@ public class RayTracerBasic extends RayTracerBase {
 	 * @param level
 	 * @param kx
 	 * @param kkx
-	 * @return the color obtained by the reflection and refraction rays
+	 * @return the color obtained by the reflection rays
 	 */
-	private Color calcGlobalEffectBeamOfRay(Ray ray, int level, double kx, double kkx) {
+	private Color calcGlobalEffectBeamOfRayReflected(Ray ray, int level, double kx, double kkx) {
 		GeoPoint gp = findClosestIntersection(ray);
-		return (gp == null ? scene.background : calcColorBeamOfRay(gp, ray, level - 1, kkx)).scale(kx);
+		return (gp == null ? scene.background : calcColorBeamOfRayReflected(gp, ray, level - 1, kkx)).scale(kx);
 	}
 	
+	
+	/**
+	 * mini project 1 : the same function for beam of rays
+
+	 * @param ray
+	 * @param level
+	 * @param kx
+	 * @param kkx
+	 * @return the color obtained by the refraction rays
+	 */
+	private Color calcGlobalEffectBeamOfRayRefracted(Ray ray, int level, double kx, double kkx) {
+		GeoPoint gp = findClosestIntersection(ray);
+		return (gp == null ? scene.background : calcColorBeamOfRayRefracted(gp, ray, level - 1, kkx)).scale(kx);
+	}
 	
 	
 
@@ -386,14 +477,16 @@ public class RayTracerBasic extends RayTracerBase {
 		Ray normal = new Ray(rEnd, new Vector((-1) * r.getDir().getHead().getY(), r.getDir().getHead().getX(), 0)); //first normal (-y,x,0)
 		Ray y = new Ray(rEnd, normal.getDir().crossProduct(r.getDir())); // second normal (cross product) 
 		Point3D po1 = rEnd.add(normal.getDir()); // first point of the square
-		Point3D po2 = rEnd.subtract(normal.getDir().getHead()).getHead(); // first point of the square
+		Point3D po2 = rEnd.add(normal.getDir().scale(-1)); // second point of the square
+		//Point3D po2 = ((normal.getDir().getHead()).subtract(rEnd) ).getHead(); // second point of the square
 		Point3D po3 = rEnd.add(y.getDir()); // third point of the square
-		Point3D po4 = rEnd.subtract(y.getDir().getHead()).getHead(); // fourth point of the square
+		Point3D po4 = rEnd.add(y.getDir().scale(-1)); // fourth point of the square
+		//Point3D po4 = rEnd.subtract(y.getDir().getHead()).getHead(); // fourth point of the square
+
 		for (int i = 0; i < 50; i++) {
-			double randX = po2.getX() + ((int) (Math.random() * ((po1.getX() - po2.getX())+1)));
-			double randY = po4.getY() + ((int) (Math.random() * ((po3.getY() - po4.getY())+1)));
-			Vector vec = r.getP0().subtract(new Point3D(randX, randY, rEnd.getZ()));
-			Ray newRay = new Ray(r.getP0(), vec);
+			double randX = po2.getX() + ((double) (Math.random() * ((po1.getX() - po2.getX())+1)));
+			double randY = po4.getY() + ((double) (Math.random() * ((po3.getY() - po4.getY())+1)));
+			Ray newRay = new Ray(r.getP0(),r.getP0().subtract(new Point3D(randX, randY, rEnd.getZ())));
 			beamOfRays.add(newRay);
 		}
 		return beamOfRays;

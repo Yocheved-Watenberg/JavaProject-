@@ -5,6 +5,7 @@ package renderer;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import elements.LightSource;
 import geometries.Intersectable.GeoPoint;
@@ -483,7 +484,9 @@ public class RayTracerBasic extends RayTracerBase {
 
 		for (int i = 0; i < 50; i++) {
 			double randX = po2.getX() + ((double) (Math.random() * ((po1.getX() - po2.getX())+1)));
+			System.out.println(randX);
 			double randY = po4.getY() + ((double) (Math.random() * ((po3.getY() - po4.getY())+1)));
+			System.out.println(randY);
 			Ray newRay = new Ray(r.getP0(),r.getP0().subtract(new Point3D(randX, randY, rEnd.getZ())));
 			beamOfRays.add(newRay);
 		}
@@ -523,8 +526,10 @@ public class RayTracerBasic extends RayTracerBase {
 		Point3D po4 = rEnd.subtract(y.getDir().getHead()).getHead(); // fourth point of the square
 
 		for (int i = 0; i < 50; i++) {
-			double randX = po2.getX() + ((int) (Math.random() * ((po1.getX() - po2.getX())+1)));
-			double randY = po4.getY() + ((int) (Math.random() * ((po3.getY() - po4.getY())+1)));
+			//double randX=ThreadLocalRandom.current().nextDouble() * (po1.getX() - po2.getX()) + po2.getX();
+			double randX = po2.getX() + ((double) (Math.random() * ((po1.getX() - po2.getX())+1)));
+			//double randY=ThreadLocalRandom.current().nextDouble() * (po3.getY() - po4.getY()) + po4.getY();
+			double randY = po4.getY() + ((double) (Math.random() * ((po3.getY() - po4.getY())+1)));
 			Vector vec = r.getP0().subtract(new Point3D(randX, randY, rEnd.getZ()));
 			Ray newRay = new Ray(r.getP0(), vec);
 			beamOfRays.add(newRay);

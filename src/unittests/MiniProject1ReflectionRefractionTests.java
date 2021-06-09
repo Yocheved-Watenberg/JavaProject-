@@ -82,7 +82,7 @@ public class MiniProject1ReflectionRefractionTests{
 				.setEmission(new Color(java.awt.Color.BLUE)) 
 				.setMaterial(new Material().setKd(0.5).setKs(0.5).setnShininess(100)),
 		new Plane(new Point3D(0,-10,0), new Vector(0,1,0.1)).setEmission(new Color(0,0,0))
-		.setMaterial(new Material().setKd(0.5).setKs(0.5).setnShininess(100).setkR(1)));
+		.setMaterial(new Material().setKd(0.5).setKs(0.5).setnShininess(100).setkT(1)));
 		
 		scene.lights.add( //
 				new SpotLight(new Color(60, 60, 60), new Point3D(0, 0, 500), new Vector(0, 0, -1)) //

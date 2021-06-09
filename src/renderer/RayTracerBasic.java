@@ -486,9 +486,7 @@ public class RayTracerBasic extends RayTracerBase {
 
 		for (int i = 0; i < 50; i++) {
 			double randX = po2.getX() + ((double) (Math.random() * ((po1.getX() - po2.getX())+1)));
-			System.out.println(randX);
 			double randY = po4.getY() + ((double) (Math.random() * ((po3.getY() - po4.getY())+1)));
-			System.out.println(randY);
 			Ray newRay = new Ray(r.getP0(),r.getP0().subtract(new Point3D(randX, randY, rEnd.getZ())));
 			beamOfRays.add(newRay);
 		}
@@ -529,12 +527,6 @@ public class RayTracerBasic extends RayTracerBase {
 
 
 		for (int i = 0; i < 50; i++) {
-
-			//double randX=ThreadLocalRandom.current().nextDouble() * (po1.getX() - po2.getX()) + po2.getX();
-			//double randX = po2.getX() + ((double) (Math.random() * ((po1.getX() - po2.getX())+1)));
-			//double randY=ThreadLocalRandom.current().nextDouble() * (po3.getY() - po4.getY()) + po4.getY();
-			//double randY = po4.getY() + ((double) (Math.random() * ((po3.getY() - po4.getY())+1)));
-
 			double randX = nextDoubleBetween (po2.getX(), po1.getX());
 			double randY = nextDoubleBetween (po4.getY(), po3.getY());
 			

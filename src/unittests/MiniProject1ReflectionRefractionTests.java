@@ -57,14 +57,14 @@ public class MiniProject1ReflectionRefractionTests{
 	
 
 		Render render = new Render() //
-				.setImageWriter(new ImageWriter("OneRay3", 500, 500)) //
+				.setImageWriter(new ImageWriter("OneRay", 500, 500)) //
 				.setCamera(camera) //
 				.setRayTracerBase(new RayTracerBasic(scene));
 		render.renderImage();
 		render.writeToImage();
 	}
 	
-	/*
+	
 	
 	@Test
 	public void BeamOfRayRefracted() {
@@ -97,13 +97,12 @@ public class MiniProject1ReflectionRefractionTests{
 	
 
 		Render render = new Render() //
-				.setImageWriter(new ImageWriter("BeamOfRayRefracted3", 500, 500)) //
+				.setImageWriter(new ImageWriter("BeamOfRayRefracted", 500, 500)) //
 				.setCamera(camera) //
 				.setRayTracerBase(new RayTracerBasic(scene));
 		render.renderImageBeamOfRayRefracted();
 		render.writeToImage();
 	}
-	*/
 	@Test
 	public void BeamOfRayReflected() {
 		Camera camera = new Camera(new Point3D(0, 0, 1000), new Vector(0, 0, -1), new Vector(0, 1, 0)) //
@@ -136,7 +135,7 @@ public class MiniProject1ReflectionRefractionTests{
 			
 
 		Render render = new Render() //
-				.setImageWriter(new ImageWriter("BeamOfRayReflected3", 500, 500)) //
+				.setImageWriter(new ImageWriter("BeamOfRayReflected", 500, 500)) //
 				.setCamera(camera) //
 				.setRayTracerBase(new RayTracerBasic(scene));
 		render.renderImageBeamOfRayReflected();

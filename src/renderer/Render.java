@@ -131,8 +131,6 @@ public class Render {
 		Color pixelColor; 
 		for (int i=0; i<imageWriter.getNx(); i++) {
 			for (int j=0; j<imageWriter.getNy(); j++) {
-				if(i==144 && j==347)
-					System.out.print("here");
 				pixelColor = rayTracerBase.traceBeamOfRayRefracted(camera.constructRayThroughPixel(imageWriter.getNx(), imageWriter.getNy(),i,j));
 				imageWriter.writePixel(i,j,pixelColor);	 //color the pixel 
 			}		

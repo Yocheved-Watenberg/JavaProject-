@@ -4,8 +4,24 @@ public class Material {
 	
 	public double kD = 0;
 	public double kS = 0;
-	public int nShininess =0;
+	public int nShininess = 0;
+	public double kGlossy = 0;
 	
+	/**
+	 * @return the kGlossy
+	 */
+	public double getkGlossy() {
+		return kGlossy;
+	}
+
+	/**
+	 * @param kGlossy the kGlossy to set
+	 */
+	public Material setkGlossy(double kGlossy) {
+		this.kGlossy = kGlossy;
+		return this;
+	}
+
 	/**
 	 * Transparency coefficient
 	 */

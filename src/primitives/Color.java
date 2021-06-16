@@ -23,6 +23,7 @@ public class Color {
 	 * Black color = (0,0,0)
 	 */
 	public static final Color BLACK = new Color();
+	private static final int CLOSE_ENOUGH = 20;
 
 	/**
 	 * Default constructor - to generate Black Color (privately)
@@ -143,6 +144,10 @@ public class Color {
 			count++;	
 		}
 		return new Color(rr/count, rg/count, rb/count);
+	}
+	
+	public boolean isCloseEnough(Color other) {
+		return Math.abs(r - other.r) < CLOSE_ENOUGH &&  Math.abs(g - other.g) < CLOSE_ENOUGH &&  Math.abs(b - other.b) < CLOSE_ENOUGH;
 	}
 
 }

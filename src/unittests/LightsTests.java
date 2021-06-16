@@ -40,11 +40,11 @@ public class LightsTests {
 		scene1.geometries.add(sphere);
 		scene1.lights.add(new DirectionalLight(new Color(500, 300, 0), new Vector(1, 1, -1)));
 
-		ImageWriter imageWriter = new ImageWriter("lightSphereDirectional", 500, 500);
+		ImageWriter imageWriter = new ImageWriter("lightSphereDirectionalSS", 500, 500);
 		Render render = new Render()//
 				.setImageWriter(imageWriter) //
 				.setCamera(camera1) //
-				.setRayTracerBase(new RayTracerBasic(scene1));
+				.setRayTracer(new RayTracerBasic(scene1)).setMiniminalScale(1d/256);
 		render.renderImage();
 		render.writeToImage();
 	}
@@ -62,7 +62,7 @@ public class LightsTests {
 		Render render = new Render()//
 				.setImageWriter(imageWriter) //
 				.setCamera(camera1) //
-				.setRayTracerBase(new RayTracerBasic(scene1));
+				.setRayTracer(new RayTracerBasic(scene1));
 		render.renderImage();
 		render.writeToImage();
 	}
@@ -80,7 +80,7 @@ public class LightsTests {
 		Render render = new Render()//
 				.setImageWriter(imageWriter) //
 				.setCamera(camera1) //
-				.setRayTracerBase(new RayTracerBasic(scene1));
+				.setRayTracer(new RayTracerBasic(scene1));
 		render.renderImage();
 		render.writeToImage();
 	}
@@ -98,7 +98,7 @@ public class LightsTests {
 		Render render = new Render()//
 				.setImageWriter(imageWriter) //
 				.setCamera(camera2) //
-				.setRayTracerBase(new RayTracerBasic(scene2));
+				.setRayTracer(new RayTracerBasic(scene2));
 		render.renderImage();
 		render.writeToImage();
 	}
@@ -117,7 +117,7 @@ public class LightsTests {
 		Render render = new Render()//
 				.setImageWriter(imageWriter) //
 				.setCamera(camera2) //
-				.setRayTracerBase(new RayTracerBasic(scene2));
+				.setRayTracer(new RayTracerBasic(scene2));
 		render.renderImage();
 		render.writeToImage();
 	}
@@ -136,7 +136,7 @@ public class LightsTests {
 		Render render = new Render()//
 				.setImageWriter(imageWriter) //
 				.setCamera(camera2) //
-				.setRayTracerBase(new RayTracerBasic(scene2));
+				.setRayTracer(new RayTracerBasic(scene2));
 		render.renderImage();
 		render.writeToImage();
 	}
@@ -157,7 +157,7 @@ public class LightsTests {
 		Render render = new Render()//
 				.setImageWriter(imageWriter) //
 				.setCamera(camera1) //
-				.setRayTracerBase(new RayTracerBasic(scene1));
+				.setRayTracer(new RayTracerBasic(scene1));
 		render.renderImage();
 		render.writeToImage();
 	}
@@ -180,7 +180,7 @@ public class LightsTests {
 		Render render = new Render()//
 				.setImageWriter(imageWriter) //
 				.setCamera(camera2) //
-				.setRayTracerBase(new RayTracerBasic(scene2));
+				.setRayTracer(new RayTracerBasic(scene2));
 		render.renderImage();
 		render.writeToImage();
 	}

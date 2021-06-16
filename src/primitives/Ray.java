@@ -1,6 +1,9 @@
 package primitives;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
 import geometries.Intersectable.GeoPoint;
 
 public class Ray {
@@ -128,6 +131,40 @@ public class Ray {
 			   	   distanceMin= p0.distance(pointMin.point);		//and the distanceMin
 		}
 		return pointMin;									//return the closest point to p0 of the list
+	}
+	
+	public List<Ray> splitRay(int numOfRays, double tanAngle) {
+		List<Ray> rays = new ArrayList<Ray>();
+		rays.add(this);
+		
+		// (-y, x, 0) * (x, y, z) = 0
+		Vector normal1;
+		if (Util.isZero(dir.getHead().getY()) && Util.isZero(dir.getHead().getX())) {
+			normal1 =  new Vector(1, 0, 0);
+		} else {
+			normal1 = new Vector(-dir.getHead().getY(), dir.getHead().getX(), 0).normalize();
+		}
+		Vector normal2 = dir.crossProduct(normal1).normalize();		
+		Random rand = new Random();
+		
+		for(int i = 0; i < numOfRays; i++) {
+			double len1 = (rand.nextDouble() - 0.5) * 2 * tanAngle;
+			double len2 = Math.sqrt(tanAngle*tanAngle - len1*len1);
+			if (Double.isNaN(len2)) {
+				len2 = 0;
+			}
+			Point3D endPoint = getPoint(1);
+			if(!Util.isZero(len1)) {
+				endPoint = endPoint.add(normal1.scale(len1));
+			}
+			if(!Util.isZero(len2)) {
+				endPoint = endPoint.add(normal2.scale(len2));
+			}
+			
+			rays.add(new Ray(p0, p0.subtract(endPoint)));
+		}
+		
+		return rays;
 	}
 	
 	

@@ -34,26 +34,9 @@ abstract public class RayTracerBase {
 	/**
 	 * abstract function 
 	 * @param ray 
-	 * @return the color of the intersection point through this ray  
+	 * @return the color of of the intersection point through this ray  
 	 * 
 	 */
 	public abstract Color traceRay (Ray ray);
 	
-	
-	/**
-	 * abstract function traceBeamOfRayReflected
-	 * @param ray 
-	 * @return the color   
-	 * 
-	 */
-	public abstract Color traceBeamOfRayReflected (Ray ray);
-	
-	
-	/**
-	 * abstract function traceBeamOfRayRefracted
-	 * @param ray 
-	 * @return the color   
-	 * 
-	 */
-	public abstract Color traceBeamOfRayRefracted (Ray ray);
 }

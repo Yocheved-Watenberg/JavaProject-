@@ -28,6 +28,7 @@ public class Scene {
 	public AmbientLight ambientLight = new AmbientLight();
 	public Geometries geometries = new Geometries();  
 	public List<LightSource> lights = new LinkedList<LightSource>(); 
+	public int numOfRays = 0;
 	
 	/**
 	 * Constructor scene 
@@ -73,6 +74,15 @@ public class Scene {
 	 */
 	public Scene setLights(List<LightSource> lights) {
 		this.lights = lights;
+		return this;
+	}
+	
+	/**
+	 * @param numOfRays the num of rays for blurry
+	 * @return the scene 
+	 */
+	public Scene setNumOfRays(int numOfRays) {
+		this.numOfRays = numOfRays;
 		return this;
 	}
 

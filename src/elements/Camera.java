@@ -1,5 +1,7 @@
 package elements;
 
+import java.util.List;
+
 import primitives.*;
 
 /**
@@ -126,5 +128,39 @@ public class Camera {
 	Vector Vij=p0.subtract(Pij); 							//Pij-p0
 	return new Ray(p0,Vij); 		//return the ray with p0 and the vector director (normalized by the ctor of ray) 
 	}
+	
+public Point3D getCenterOfPixel(int nX, int nY, int j, int i) {
+	Point3D Pc=p0.add(vTo.scale(distance));					//center 
+	double Ry=height/nY;									//pixel height
+	double Rx=width/nX;										//pixel width 
+	double xj=(j-(nX-1)/2.0)*Rx;							//how much we move horizontally
+	double yi=-(i-(nY-1)/2.0)*Ry;							//how much we move vertically
+	Point3D Pij=Pc;
+	if(!Util.isZero(xj)) Pij=Pij.add(vRight.scale(xj));  	//move horizontally 
+	if(!Util.isZero(yi)) Pij=Pij.add(vUp.scale(yi));
+	return Pij;
+}
+
+public Point3D[] cornersOfPixel(int nX, int nY, Point3D center, double scale) {
+	double Ry=height/nY;									//pixel height
+	double Rx=width/nX;
+	Point3D[] corners = new Point3D[4];
+	corners[0] = center.add(vRight.scale(Rx / 2 * scale)).add(vUp.scale(Ry / 2 * scale));
+	corners[1] = center.add(vRight.scale(-Rx / 2 * scale)).add(vUp.scale(Ry / 2 * scale));
+	corners[2] = center.add(vRight.scale(Rx / 2 * scale)).add(vUp.scale(-Ry / 2 * scale));
+	corners[3] = center.add(vRight.scale(-Rx / 2 * scale)).add(vUp.scale(-Ry / 2 * scale));	
+	return corners;
+}
+
+public Ray[] constructRaysThroughPixel(int nX, int nY, Point3D center, double scale) {
+	Ray[] rays = new Ray[5];
+	rays[0] = new Ray(p0, p0.subtract(center));
+	Point3D[] corners = cornersOfPixel(nX, nY, center, scale);
+	for(int i = 1; i < rays.length; i++) {
+		rays[i] = new Ray(p0, p0.subtract(corners[i - 1]));
+	}
+	
+	return rays;
+}
 
 }

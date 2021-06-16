@@ -49,7 +49,7 @@ public class AllEffectsTests {
 		Render render = new Render() //
 				.setImageWriter(imageWriter) //
 				.setCamera(camera) //
-				.setRayTracerBase (new RayTracerBasic(scene));
+				.setRayTracer(new RayTracerBasic(scene));
 
 		render.renderImage();
 		render.writeToImage();

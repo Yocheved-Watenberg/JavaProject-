@@ -145,7 +145,11 @@ public class Color {
 		}
 		return new Color(rr/count, rg/count, rb/count);
 	}
-	
+	/**
+	 * 
+	 * @param other
+	 * @return if the color are close enough
+	 */
 	public boolean isCloseEnough(Color other) {
 		return Math.abs(r - other.r) < CLOSE_ENOUGH &&  Math.abs(g - other.g) < CLOSE_ENOUGH &&  Math.abs(b - other.b) < CLOSE_ENOUGH;
 	}

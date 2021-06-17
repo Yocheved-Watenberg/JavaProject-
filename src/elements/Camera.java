@@ -128,7 +128,14 @@ public class Camera {
 	Vector Vij=p0.subtract(Pij); 							//Pij-p0
 	return new Ray(p0,Vij); 		//return the ray with p0 and the vector director (normalized by the ctor of ray) 
 	}
-	
+/**
+ * 	
+ * @param nX
+ * @param nY
+ * @param j
+ * @param i
+ * @return the center of the pixel
+ */
 public Point3D getCenterOfPixel(int nX, int nY, int j, int i) {
 	Point3D Pc=p0.add(vTo.scale(distance));					//center 
 	double Ry=height/nY;									//pixel height
@@ -141,6 +148,15 @@ public Point3D getCenterOfPixel(int nX, int nY, int j, int i) {
 	return Pij;
 }
 
+
+/**
+ * 
+ * @param nX
+ * @param nY
+ * @param center
+ * @param scale
+ * @return an array of the corners of the pixel
+ */
 public Point3D[] cornersOfPixel(int nX, int nY, Point3D center, double scale) {
 	double Ry=height/nY;									//pixel height
 	double Rx=width/nX;
@@ -152,6 +168,14 @@ public Point3D[] cornersOfPixel(int nX, int nY, Point3D center, double scale) {
 	return corners;
 }
 
+/***
+ * 
+ * @param nX
+ * @param nY
+ * @param center
+ * @param scale
+ * @return an array of 5 rays through each coin of the pixel
+ */
 public Ray[] constructRaysThroughPixel(int nX, int nY, Point3D center, double scale) {
 	Ray[] rays = new Ray[5];
 	rays[0] = new Ray(p0, p0.subtract(center));

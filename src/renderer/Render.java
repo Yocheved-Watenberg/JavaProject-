@@ -248,6 +248,14 @@ public class Render {
 		}	
 	}
 	
+	/**
+	 * 
+	 * @param nX
+	 * @param nY
+	 * @param center
+	 * @param scale
+	 * @return the color of the final ray
+	 */
 	private Color castRay(int nX, int nY, Point3D center, double scale) {
 		Ray[] rays = camera.constructRaysThroughPixel(nX, nY, center, scale);
 		Color[] colors = new Color[rays.length];

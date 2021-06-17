@@ -123,21 +123,26 @@ public class Ray {
 	public GeoPoint findClosestGeoPoint (List<GeoPoint> l){
 		if (l.isEmpty()) 
 			return null;	
-		GeoPoint pointMin = l.get(0);						//we initialize the closest point with the first value of the list
+		GeoPoint pointMin = l.get(0);								//we initialize the closest point with the first value of the list
 		double distanceMin = p0.distance(pointMin.point);			//we calculate its distance to p0
-		for (int i=1; i<l.size(); i++) {					//for all the others points
+		for (int i=1; i<l.size(); i++) {							//for all the others points
 			   if(p0.distance(l.get(i).point) < distanceMin)		//if they are closest to p0 than the min 
-		           pointMin = l.get(i);						//we change the min
+		           pointMin = l.get(i);								//we change the min
 			   	   distanceMin= p0.distance(pointMin.point);		//and the distanceMin
 		}
-		return pointMin;									//return the closest point to p0 of the list
+		return pointMin;											//return the closest point to p0 of the list
 	}
-	
+	/**
+	 * Mini project 1 : function to create a beam of rays instead of 1 ray
+	 * @param numOfRays
+	 * @param tanAngle
+	 * @return beam of rays
+	 */
 	public List<Ray> splitRay(int numOfRays, double tanAngle) {
 		List<Ray> rays = new ArrayList<Ray>();
-		rays.add(this);
+		rays.add(this);													//adds the first ray
 		
-		// (-y, x, 0) * (x, y, z) = 0
+																		// (-y, x, 0) * (x, y, z) = 0
 		Vector normal1;
 		if (Util.isZero(dir.getHead().getY()) && Util.isZero(dir.getHead().getX())) {
 			normal1 =  new Vector(1, 0, 0);
@@ -148,9 +153,9 @@ public class Ray {
 		Random rand = new Random();
 		
 		for(int i = 0; i < numOfRays; i++) {
-			double len1 = (rand.nextDouble() - 0.5) * 2 * tanAngle;
-			double len2 = Math.sqrt(tanAngle*tanAngle - len1*len1);
-			if (Double.isNaN(len2)) {
+			double len1 = (rand.nextDouble() - 0.5) * 2 * tanAngle;		//random between -1 and 1
+			double len2 = Math.sqrt(tanAngle*tanAngle - len1*len1);		//Pythagore
+			if (Double.isNaN(len2)) {									//verify that len2 different to null
 				len2 = 0;
 			}
 			Point3D endPoint = getPoint(1);
@@ -161,7 +166,7 @@ public class Ray {
 				endPoint = endPoint.add(normal2.scale(len2));
 			}
 			
-			rays.add(new Ray(p0, p0.subtract(endPoint)));
+			rays.add(new Ray(p0, p0.subtract(endPoint)));				//creates the new rays
 		}
 		
 		return rays;

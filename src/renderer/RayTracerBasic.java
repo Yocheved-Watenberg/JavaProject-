@@ -162,7 +162,7 @@ public class RayTracerBasic extends RayTracerBase {
 			List<Ray> rays = reflected.splitRay(scene.numOfRays, gp.geometry.getMaterial().getkGlossy());
 			Color reflectedColor = Color.BLACK;
 			for(var ray : rays) {
-				reflectedColor = reflectedColor.add(calcGlobalEffect(ray, level, material.kR, kkr));
+				reflectedColor = reflectedColor.add(calcGlobalEffect(ray, level, material.kR, kkr));//if there are a beam of reflected rays instead of one ray
 			}
 			color = color.add(reflectedColor.reduce(rays.size()));
 		}
@@ -171,7 +171,7 @@ public class RayTracerBasic extends RayTracerBase {
 			Ray refracted = constructRefractedRay(gp.point, v, n);
 			List<Ray> rays = refracted.splitRay(scene.numOfRays, gp.geometry.getMaterial().getkGlossy());
 			Color refractedColor = Color.BLACK;
-			for(var ray : rays) {
+			for(var ray : rays) {																	//if there are a beam of refracted rays instead of one ray
 				refractedColor = refractedColor.add(calcGlobalEffect(ray, level, material.kT, kkt));
 			}
 			color = color.add(refractedColor.reduce(rays.size()));

@@ -5,7 +5,7 @@ public class Material {
 	public double kD = 0;
 	public double kS = 0;
 	public int nShininess = 0;
-	public double kGlossy = 0;
+	public double kGlossy = 0;			//to know if the image will be glossy or not
 	
 	/**
 	 * @return the kGlossy
@@ -111,5 +111,6 @@ public class Material {
 		this.nShininess = nShininess;
 		return this; 
 	}	
+	
 
 }

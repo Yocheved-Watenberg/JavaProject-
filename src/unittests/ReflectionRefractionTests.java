@@ -163,7 +163,7 @@ public class ReflectionRefractionTests {
 						.setMaterial(new Material().setKd(0.5).setKs(0.5).setnShininess(60)), //
 				new Triangle(new Point3D(-150, -150, -115), new Point3D(-70, 70, -140), new Point3D(75, 75, -150)) //
 						.setMaterial(new Material().setKd(0.5).setKs(0.5).setnShininess(60)), //
-				new Sphere( new Point3D(60, 50, -50),30) //
+						new Sphere( new Point3D(60, 50, -50),30) //
 						.setEmission(new Color(java.awt.Color.BLUE)) //
 						.setMaterial(new Material().setKd(0.2).setKs(0.2).setnShininess(30).setkT(0.6).setkGlossy(0.07)));
 
